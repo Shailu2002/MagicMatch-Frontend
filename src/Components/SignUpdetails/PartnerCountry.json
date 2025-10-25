@@ -1,0 +1,57 @@
+[
+    {
+      "region": "India",
+      "states": [
+        {
+          "name": "Jammu and kashmir",
+          "cities": ["Achhabal","Aishmuquam","open to all"]
+        },
+        {
+          "name": "Uttar pradesh",
+          "cities": ["Kanpur","Lucknow","Agra","Meerut","Varanasi","Prayagraj","Noida","Ayodhya","Unnao","Bijnor","Hardoi","open to all"]
+        },
+        {
+            "name":"Madhya Pradesh",
+            "cities":["Gwalior","Indore","Jabalpur","Rewa","Chhatarpur","Satna","Ujjan","Bhopal","open to all"]
+        },
+        {
+            "name":"Maharashtra",
+            "cities":["Mumbai","Nagpur","Pune","Nashik","Aurangabad","Satara","Badlapur","Chandrapur","Kolhapur","Solapur","Thane","open to all"]
+        },
+        {
+            "name":"Uttarakand",
+            "cities":["Dehradun","Haridwar","Roorkee","Nainital","Haldwani","Rudrapur","Kashipur","Rishikesh","open to all"]
+        },
+        {
+            "name":"Rajasthan",
+            "cities":["Jaipur","Jodhpur","Kota","Bikaner","Ajmer","Udaipur","Durgapur","Pratapgarh","Hanumangarh","kishangarh","open to all"]
+        },
+        {
+            "name":"Punjab",
+            "cities":["Ludhiana","Amritsar","Jalandhar","Patiala","Firozpur","Batala","Hoshiarpur","Sunam","open to all"]
+        },
+        {
+            "name":"Gujarat",
+            "cities":["Ahmedabad","Surat","Vadodara","Gandhinagar","Rajkot","Patan","Kalol","open to all"]
+        },
+        {
+            "name":"open to all",
+            "cities":["open to all"]
+        }
+       
+      ]
+    },
+
+    {
+      "region": "open to all",
+      "states": [
+        {
+          "name": "open to all",
+          "cities": ["open to all"]
+        }
+       
+      ]
+    }
+   
+      
+  ]

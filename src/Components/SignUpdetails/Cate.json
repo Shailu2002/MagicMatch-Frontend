@@ -1,0 +1,44 @@
+
+[
+    
+  {
+    "religion":"Hindu",
+    "caste":["Brahmin","Kshratiya","Vaishya","Sudhra"]
+  },
+  {
+    "religion":"Muslim",
+    "caste":["Sheikh","Shia","Sunni","Shaafi","Shia Bohra","Shia Imami Ismaili","Shia Zaidi","Sunni Hanafi","Sunni Maliki","Sunni Shafi","Syed"]
+  },
+  {
+    "religion":"Christian",
+    "caste":["Bretheren","Cannonite","Catholic","Christian Nadar","Syrian","Roman Catholic"]
+  },
+  {
+    "religion":"Sikh",
+    "caste":["Gursikh","Jat","Arora","Khatri","Labana","Rajput","Ramdasia","Ramgharia","Ravidasia"]
+  },
+  {
+    "religion":"Jain",
+    "caste":["Digambar","Porwal","Shwetamber","Vania"]
+  },
+  {
+    "religion":"Parsi",
+    "caste":[]
+  },
+  {
+    "religion":"Buddhist",
+    "caste":[]
+  },
+  {
+    "religion":"Jewish",
+    "caste":[]
+  },
+  {
+    "religion":"No religion",
+    "caste":[]
+  },
+  {
+    "religion":"Spiritual",
+    "caste":[]
+  }
+  ]

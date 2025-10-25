@@ -1,0 +1,40 @@
+[
+    {
+      "region": "India",
+      "states": [
+        {
+          "name": "Jammu and kashmir",
+          "cities": ["Achhabal","Aishmuquam"]
+        },
+        {
+          "name": "Uttar pradesh",
+          "cities": ["Kanpur","Lucknow","Agra","Meerut","Varanasi","Prayagraj","Noida","Ayodhya","Unnao","Bijnor","Hardoi"]
+        },
+        {
+            "name":"Madhya Pradesh",
+            "cities":["Gwalior","Indore","Jabalpur","Rewa","Chhatarpur","Satna","Ujjan","Bhopal"]
+        },
+        {
+            "name":"Maharashtra",
+            "cities":["Mumbai","Nagpur","Pune","Nashik","Aurangabad","Satara","Badlapur","Chandrapur","Kolhapur","Solapur","Thane"]
+        },
+        {
+            "name":"Uttarakand",
+            "cities":["Dehradun","Haridwar","Roorkee","Nainital","Haldwani","Rudrapur","Kashipur","Rishikesh"]
+        },
+        {
+            "name":"Rajasthan",
+            "cities":["Jaipur","Jodhpur","Kota","Bikaner","Ajmer","Udaipur","Durgapur","Pratapgarh","Hanumangarh","kishangarh"]
+        },
+        {
+            "name":"Punjab",
+            "cities":["Ludhiana","Amritsar","Jalandhar","Patiala","Firozpur","Batala","Hoshiarpur","Sunam"]
+        },
+        {
+            "name":"Gujarat",
+            "cities":["Ahmedabad","Surat","Vadodara","Gandhinagar","Rajkot","Patan","Kalol"]
+        }
+       
+      ]
+    }
+  ]
