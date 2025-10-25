@@ -30,7 +30,7 @@ import MyMatches from './Components/AfterLoginWork/MyMatches';
 import HororDetails from './Components/AfterLoginWork/HororDetails';
 import Feedback from './Components/Feedback';
 import Profile from './Components/AfterLoginWork/Profile';
-import ViewKundali from './Components/ViewKundali';
+// import ViewKundali from './Components/ViewKundali';
 import ReceivedInvitation from './Components/AfterLoginWork/Inbox/ReceivedInvitation';
 //admin side 
 import Dash from './Home/Dash';
@@ -75,7 +75,7 @@ function App() {
         <Routes>
           <Route path="/inbox_received" element={ <ReceivedInvitation/>}/>
           <Route path="/inbox_sent" element={<SentInvitation/>}/>
-          <Route path="/viewkundali" element={ <ViewKundali/>}/>
+          {/* <Route path="/viewkundali" element={ <ViewKundali/>}/> */}
           <Route path="/allprofile" element={ <Profile/>}/>
           <Route path="/feed" element={<Feedback/> }/>
           <Route path="/qrpage" element={ <QRpage/>}/>
