@@ -25,7 +25,7 @@
     "react-bootstrap": "^2.7.2",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "react-elastic-carousel": "^0.11.5",
+    "react-multi-carousel": "^2.8.6",
     "react-multi-select-component": "^4.3.4",
     "react-pdf": "^10.2.0",
     "react-router-dom": "^6.8.1",
