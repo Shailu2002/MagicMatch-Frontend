@@ -5,10 +5,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 const Photo = () => {
-      const history = new useNavigate();
-    const location = new useLocation();
+      const history =  useNavigate();
+    const location =  useLocation();
     
-      const id = location.state.gent;
+      const id = location.state?.gent;
       const form = useRef();
       console.log(id);
         const [newUser, setNewUser] = useState(
@@ -27,24 +27,37 @@ const Photo = () => {
                 const formData = new FormData();
                 formData.append('user_photo', newUser.user_photo);
                 formData.append('user_id', newUser.user_id);
-                axios.post('http://localhost:8003/photo_router/add/', formData)
-                    .then(res => {
-                        console.log(res);
-                        toast.success("Photo Uploaded");
-                        emailjs.sendForm('service_442j1ys', 'template_1s4hxf8', form.current, 'DA8BgdQHSMf19mJov')
-                        .then((result) => {
-                            console.log(result.text);
-                        }, (error) => {
-                            console.log(error.text);
-                        });
-                        localStorage.clear();
-                        history('/login', { replace: "true" });
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        toast.error("something went wrong");
-
-                    });
+                axios
+                  .post("http://localhost:8003/photo_router/add/", formData, {
+                    headers: { "Content-Type": "multipart/form-data" },
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    toast.success("Photo Uploaded");
+                    emailjs
+                      .sendForm(
+                        "service_442j1ys",
+                        "template_1s4hxf8",
+                        form.current,
+                        "DA8BgdQHSMf19mJov"
+                      )
+                      .then(
+                        (result) => {
+                          console.log(result.text);
+                        },
+                        (error) => {
+                          console.log(error.text);
+                        }
+                      );
+                      localStorage.clear();
+                      setTimeout(() => {
+                        history("/login", { replace: true });
+                      }, 1500);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    toast.error("something went wrong");
+                  });
                 
             }   
         }

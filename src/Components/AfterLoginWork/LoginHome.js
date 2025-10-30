@@ -5,7 +5,7 @@ import '../AfterLoginWork/LoginStyle.css';
 import axios from 'axios';
 import { toast, ToastContainer} from 'react-toastify';
 const LoginHome = () => {
-  const history = new useNavigate();
+  const history = useNavigate();
   const uid = localStorage.getItem("luser_id");
   const id = localStorage.getItem("lid");  
   console.log(uid, id);
@@ -24,26 +24,26 @@ const LoginHome = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!newUser.user_photo) {
-        toast.error("upload your photo");
+      toast.error("upload your photo");
     }
     else {
-        const formData = new FormData();
-        formData.append('user_photo', newUser.user_photo);
-        formData.append('user_id', newUser.user_id);
-        axios.put('http://localhost:8003/photo_router/add/', formData)
-            .then(res => {
-                console.log(res);
-                toast.success("Photo Updated successfully");
-            })
-            .catch(err => {
-                console.log(err);
-                toast.error("something went wrong");
+      const formData = new FormData();
+      formData.append('user_photo', newUser.user_photo);
+      formData.append('user_id', newUser.user_id);
+      axios.put('http://localhost:8003/photo_router/add/', formData)
+        .then(res => {
+          console.log(res);
+          toast.success("Photo Updated successfully");
+          getdata();
+        })
+        .catch(err => {
+          console.log(err);
+          toast.error("something went wrong");
 
-            });
+        });
         
-    }   
-    getdata();
-}
+    }
+  };
   const naveditp = () =>
   {
     history('/editpersonal', {state:{gent:uid}});
@@ -89,7 +89,7 @@ const LoginHome = () => {
   }
   const handlePhoto = (e) => {
     setNewUser({ ...newUser, user_photo: e.target.files[0] });
-    getdata();
+    // getdata()
 }
   const displaydate = () =>
   {

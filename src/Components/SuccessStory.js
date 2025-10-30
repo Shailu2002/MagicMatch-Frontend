@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const SuccessStory = () => {
-    const history = new useNavigate();
+    const history =  useNavigate();
     const handlePhoto = (e) => {
         setNewUser({ ...newUser, success_story_photo: e.target.files[0] });
     }
@@ -111,82 +111,172 @@ const SuccessStory = () => {
     
     
   return (
-      <>
-          <Navbar/>
-          <div className='backg'>
-          <h1  className='text-danger  heading1 pt-4 text-center'>Thank You for Sharing your Story with us !</h1>
-              <div className='container cardstyle'>
-                  <div className='card cardbg'>
-                      <div className='card-body card-mt'>
-                          <p  style={{fontSize:"20px",color:"gray"}}>We would like to wish you and your better half, a life full of love, laughter and togetherness! We would also love to know a little more of your story. Who knows,
-                              it might inspire many others to find their life partners too! Do scroll down and fill in your details below.</p>
-                          <hr />
-                          <h5 className='text-center mt-4 mb-5'>Give us details of you & your partner</h5>
-                          <form onSubmit={formik.handleSubmit} >
-                              <div className='row mb-4 '>
-                                  <div className='col-sm-6'>
-                               <input type="text" name="partner1_name" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.partner1_name}  className='form-control' placeholder='Your Name' />
-                                      {  formik.touched.partner1_name && formik.errors.partner1_name ? (<div className='text-danger mb-3'>{formik.errors.partner1_name}</div>) : null}
-                                  </div>
-                                  <div className='col-sm-6'>
-                                      <input type="text" name="partner2_name" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.partner2_name} className='form-control' placeholder="Your Partner's Name" />
-                                      {  formik.touched.partner2_name && formik.errors.partner2_name ? (<div className='text-danger mb-3'>{formik.errors.partner2_name}</div>) : null}
-                                  </div>
-                                  </div>
-                                  <div className='row mb-4 '>
-                                  <div className='col-sm-6'>
-                                     
-                                <input type="email" name="partner1_mailid" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.partner1_mailid} className='form-control' placeholder='Your Email Id' />
-                                {formik.touched.partner1_mailid && formik.errors.partner1_mailid ? (<div className='text-danger mb-3'>{formik.errors.partner1_mailid}</div>) : null}
-                                  </div>
-                                  <div className='col-sm-6'>
-                                      <input type="email" name="partner2_mailid" onChange={formik.handleChange} onBlur={formik.handleBlur} value={ formik.values.partner2_mailid} className='form-control' placeholder="Your Partner's email id" />
-                                      {  formik.touched.partner2_mailid && formik.errors.partner2_mailid ? (<div className='text-danger mb-3'>{formik.errors.partner2_mailid}</div>) : null}
-                                  </div>
-                              </div>
-                              <div className='row'>
-                                  <div className='col-sm-4'>
-                                      <label className='form-label'>Your Wedding Date:</label>
-                            
-                                  </div>
-                                  <div className=' ms-0 col-sm-8'>
-                                      <input type="date" name="wedding_date" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.wedding_date} placeholder='Your Wedding Date' className='form-control' />
-        {formik.touched.wedding_date && formik.errors.wedding_date ? (<div className='text-danger mb-3'>{formik.errors.wedding_date}</div>) : null}
-                                  </div>
-                              </div>
-                              <div className='row mb-5 mt-4'>
-                                  <div className='col-sm-12'>
-                                      <textarea placeholder='Tell us how you met each other' onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.About_wedding} name="About_wedding" className='form-control' cols={70} rows={5} />
-        {formik.touched.About_wedding && formik.errors.About_wedding ? (<div className='text-danger mb-3'>{formik.errors.About_wedding}</div>) : null}
-                                  </div>
-                              </div>
-                              <div className='row'>
-                                  <div className='col-sm-12'>
-                                  <label className='form-label'>Your Couple or Wedding Photo:</label>
-                                  <input
-                                        className='form-control'
-                                        type="file"
-                                        accept=".png, .jpg, .jpeg"
-                                        name="success_story_photo"
-                                        onChange={handlePhoto}
-                                      />
-                                      <div className='text-danger mb-3'>Only png , jpeg , jpg files are allowed  </div>
-                                  </div>
-                             </div>
-                              <div className='text-center mt-5'>
-                                  <input  type="submit" className='btn btn-success'/>
-                                  <ToastContainer/>
-                                </div>   
-                          </form>
-                          
+    <>
+      <Navbar />
+      <div className="backg">
+        <h1 className="text-danger  heading1 pt-4 text-center">
+          Thank You for Sharing your Story with us !
+        </h1>
+        <div className="container cardstyle">
+          <div className="card cardbg">
+            <div className="card-body card-mt">
+              <p style={{ fontSize: "20px", color: "gray" }}>
+                We would like to wish you and your better half, a life full of
+                love, laughter and togetherness! We would also love to know a
+                little more of your story. Who knows, it might inspire many
+                others to find their life partners too! Do scroll down and fill
+                in your details below.
+              </p>
+              <hr />
+              <h5 className="text-center mt-4 mb-5">
+                Give us details of you & your partner
+              </h5>
+              <form
+                encType="multipart/form-data"
+                onSubmit={formik.handleSubmit}
+              >
+                <div className="row mb-4 ">
+                  <div className="col-sm-6">
+                    <input
+                      type="text"
+                      name="partner1_name"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.partner1_name}
+                      className="form-control"
+                      placeholder="Your Name"
+                    />
+                    {formik.touched.partner1_name &&
+                    formik.errors.partner1_name ? (
+                      <div className="text-danger mb-3">
+                        {formik.errors.partner1_name}
                       </div>
+                    ) : null}
                   </div>
-              </div>
-              
+                  <div className="col-sm-6">
+                    <input
+                      type="text"
+                      name="partner2_name"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.partner2_name}
+                      className="form-control"
+                      placeholder="Your Partner's Name"
+                    />
+                    {formik.touched.partner2_name &&
+                    formik.errors.partner2_name ? (
+                      <div className="text-danger mb-3">
+                        {formik.errors.partner2_name}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+                <div className="row mb-4 ">
+                  <div className="col-sm-6">
+                    <input
+                      type="email"
+                      name="partner1_mailid"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.partner1_mailid}
+                      className="form-control"
+                      placeholder="Your Email Id"
+                    />
+                    {formik.touched.partner1_mailid &&
+                    formik.errors.partner1_mailid ? (
+                      <div className="text-danger mb-3">
+                        {formik.errors.partner1_mailid}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div className="col-sm-6">
+                    <input
+                      type="email"
+                      name="partner2_mailid"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.partner2_mailid}
+                      className="form-control"
+                      placeholder="Your Partner's email id"
+                    />
+                    {formik.touched.partner2_mailid &&
+                    formik.errors.partner2_mailid ? (
+                      <div className="text-danger mb-3">
+                        {formik.errors.partner2_mailid}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-4">
+                    <label className="form-label">Your Wedding Date:</label>
+                  </div>
+                  <div className=" ms-0 col-sm-8">
+                    <input
+                      type="date"
+                      name="wedding_date"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.wedding_date}
+                      placeholder="Your Wedding Date"
+                      className="form-control"
+                    />
+                    {formik.touched.wedding_date &&
+                    formik.errors.wedding_date ? (
+                      <div className="text-danger mb-3">
+                        {formik.errors.wedding_date}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+                <div className="row mb-5 mt-4">
+                  <div className="col-sm-12">
+                    <textarea
+                      placeholder="Tell us how you met each other"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.About_wedding}
+                      name="About_wedding"
+                      className="form-control"
+                      cols={70}
+                      rows={5}
+                    />
+                    {formik.touched.About_wedding &&
+                    formik.errors.About_wedding ? (
+                      <div className="text-danger mb-3">
+                        {formik.errors.About_wedding}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-12">
+                    <label className="form-label">
+                      Your Couple or Wedding Photo:
+                    </label>
+                    <input
+                      className="form-control"
+                      type="file"
+                      accept=".png, .jpg, .jpeg"
+                      name="success_story_photo"
+                      onChange={handlePhoto}
+                    />
+                    <div className="text-danger mb-3">
+                      Only png , jpeg , jpg files are allowed{" "}
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center mt-5">
+                  <input type="submit" className="btn btn-success" />
+                  <ToastContainer />
+                </div>
+              </form>
+            </div>
           </div>
-
-      </>
-  )
+        </div>
+      </div>
+    </>
+  );
 }
 
 
