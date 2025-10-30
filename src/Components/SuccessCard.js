@@ -1,6 +1,7 @@
 import  { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+const VERCEL_BACKEND_URL = "https://magic-match-backend.vercel.app";
 const SuccessCard = () => {
   const [data, setdata] = useState([]);
   const Succesd = (element) => {
@@ -35,11 +36,12 @@ const SuccessCard = () => {
   };
 
   const getdata = async () => {
-    const res = await fetch("/getalldata", {
+    const res = await fetch(`${VERCEL_BACKEND_URL}/getalldata`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     });
     const datas = await res.json();
     console.log(datas);
