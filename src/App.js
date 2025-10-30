@@ -65,6 +65,7 @@ import City from './Home/Attributes/City';
 import Religion from './Home/Attributes/Religion';
 import Caste from './Home/Attributes/Caste';
 import Language from './Home/Attributes/Language';
+import './api';
 
 function App() {
   return (

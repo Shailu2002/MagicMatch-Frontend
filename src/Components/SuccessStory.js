@@ -62,7 +62,7 @@ const SuccessStory = () => {
                   formData.append('story_approval_status', story_approval_status);
             
         
-                axios.post('http://localhost:8003/success_router/add/', formData)
+                axios.post('/success_router/add/', formData)
                     .then(res => {
                         
                         console.log(res);
