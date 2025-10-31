@@ -43,6 +43,7 @@ const Membership = () => {
     
   return (
     <>
+      <LoginNav/>
       <div className="backg text-center">
         <h4 style={{ margin: "10px" }} className=" heading1 text-danger">
           Select Membership Plan
