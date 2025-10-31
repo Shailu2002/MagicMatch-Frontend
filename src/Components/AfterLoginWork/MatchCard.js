@@ -9,7 +9,7 @@ const MatchCard = ({ users,iduser }) => {
     const [page, setpage] = useState(1);
     const [pagecount, setpagecount] = useState(0);
     const counter = localStorage.getItem("ecount");
-
+    console.log(users);
     const history = new useNavigate();
     const form = useRef();
     const [getuserdata, setuserdata] = useState({
