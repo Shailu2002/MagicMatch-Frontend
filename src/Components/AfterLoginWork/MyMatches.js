@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef} from 'react';
 import LoginNav from './LoginNav';
 import MatchCard from './MatchCard';
 import axios from 'axios';
 const MyMatches = () => {
     const [alldata, setalldata] = useState([]);
     const [iddata, setiddata] = useState([]);
-    const match = [];
-    let flag = 1;
-    const [newuser, setnewuser] = useState(match);
+    const didMountRef = useRef(false);
+    const [newuser, setnewuser] = useState([]);
     async function getalldataios()
     {
         let gender = "";
@@ -38,8 +37,8 @@ const MyMatches = () => {
         let data = datas.data;
         console.log(user);
         console.log(data); 
+        const finalFilteredMatches = [];
         console.log(user.length);
-
         for (let i = 0; i < user.length; i++)
         {
             let count = 0; 
@@ -418,21 +417,18 @@ const MyMatches = () => {
          
             
             if ( (  per1 >= 70  )  &&  (  per2 >= 70) )
-            {   match.push(user[i]);
-                setnewuser(match);
+            {
+                finalFilteredMatches.push(user[i]);
             } 
         } 
+      setnewuser(finalFilteredMatches);
     }
-
-    useEffect(() =>
-    {
-        if (flag == 1) {
-            flag++;
-         
-            getdataown();
-        }
-    },[]);
-
+    useEffect(() => {
+      if (!didMountRef.current) {
+        getdataown();
+        didMountRef.current = true; 
+      }
+    }, []);
     return (
     <>
             <LoginNav />
