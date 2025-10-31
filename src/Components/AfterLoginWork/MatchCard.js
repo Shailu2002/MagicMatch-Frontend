@@ -22,11 +22,9 @@ const MatchCard = ({ users,iduser }) => {
         reply_date:null
     });
   
-    
+
     const getdata = async () =>
     {
-       
-    
         const uind = (localStorage.getItem("luser_id"));
         const res = await fetch(
           `${process.env.REACT_APP_BACKEND_URL}/getalldetails_data/${uind}`,
@@ -50,9 +48,9 @@ const MatchCard = ({ users,iduser }) => {
                 console.log("inside for loop");
                 mess = mess + users[i].user_name + " (" + users[i].user_id + ")" + ",";
             }
-           
-            form.current.message.value = mess;  
-
+            if (form.current && form.current.message) {
+              form.current.message.value = mess;
+            }
             if (counter == "1")
             {
               //match email
