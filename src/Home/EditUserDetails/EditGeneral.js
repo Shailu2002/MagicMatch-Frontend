@@ -76,15 +76,23 @@ const EditGeneral = () => {
         else {
           const { user_height, user_blood_group, user_body_type, user_complexion, user_diet } = values;
 
-          const upsign = await fetch(`/update_general/${uid}`, {
-            method: "PATCH",
-            headers: {
-              "content-type":"application/json"
-            },
-            body: JSON.stringify({
-              user_height, user_blood_group, user_body_type, user_complexion, user_diet,user_hobbies
-            })
-          });
+          const upsign = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/update_general/${uid}`,
+            {
+              method: "PATCH",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({
+                user_height,
+                user_blood_group,
+                user_body_type,
+                user_complexion,
+                user_diet,
+                user_hobbies,
+              }),
+            }
+          );
     
        
           const res = upsign.json();
@@ -107,13 +115,14 @@ const EditGeneral = () => {
   '4ft 11in - 149cm','5ft-152cm','5ft 1in - 154cm','5ft 2in - 157cm','5ft 3in - 160cm','5ft 4in - 162cm','5ft 5in - 165cm','5ft 6in - 167cm'];
   const getdata = async () => {
 
-    const res = await fetch(`/getgeneral/${uid}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getgeneral/${uid}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-
-    }
     );
     
     const datas = await res.json();

@@ -24,17 +24,19 @@ const Resetpass = () => {
     validationSchema:validationSchema,
     onSubmit: async (values) => {
       const { user_pass,user_cpass } = values;
-      const res2 = await fetch(`/update_pass_user/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(
-          {
-            user_pass,user_cpass
-          })
-  
-      });
+      const res2 = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/update_pass_user/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_pass,
+            user_cpass,
+          }),
+        }
+      );
     const data2 = res2.json();
     console.log(data2);
     if (res2.status === 201)

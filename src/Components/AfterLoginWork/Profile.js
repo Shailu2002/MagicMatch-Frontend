@@ -256,17 +256,24 @@ const Profile = () => {
     const sendemail = async (e) => {
       
         const { user_id,to_uid,message_sent, sent_date, sent_invitation_status,message_reply,reply_date } = getuserdata;
-        const sign = await fetch("/interest_sent", {
+        const sign = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/interest_sent`,
+          {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              user_id,to_uid,message_sent,sent_date,sent_invitation_status,message_reply,reply_date
-    
-            })
-          
-        });
+              user_id,
+              to_uid,
+              message_sent,
+              sent_date,
+              sent_invitation_status,
+              message_reply,
+              reply_date,
+            }),
+          }
+        );
         
         const resp = await sign.json();
         if (sign.status === 404 || !resp) {

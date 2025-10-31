@@ -21,15 +21,21 @@ const Feedback = () => {
     validationSchema:validationSchema,
     onSubmit: async (values) => {
       const { user_name,user_email,user_feedback,user_ratings } = values;
-        const sign = await fetch("/user_feedback", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-                user_name,user_email,user_feedback,user_ratings
-          })
-        });        
+        const sign = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/user_feedback`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              user_name,
+              user_email,
+              user_feedback,
+              user_ratings,
+            }),
+          }
+        );        
         const resp = await sign.json();
         if (sign.status === 404 || !resp) {
           toast.error("Something went wrong!");

@@ -9,39 +9,48 @@ export const Table = ({pay}) => {
   
   
     const udata=async(id)=>{
-        const res3= await fetch(`/approve/${id}`,{
-          method:"PUT",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify({ })
-        })
+        const res3 = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/approve/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
+        );
         const data3= res3.json();
         console.log(data3)
        
       };
       
       const pstatus=async(id)=>{
-        const res3= await fetch(`/P_status/${id}`,{
-          method:"PUT",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify({ })
-        })
+        const res3 = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/P_status/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
+        );
         const data3= res3.json();
         console.log(data3)
        
       };
       
        const handleReject=async(id)=>{
-        const res3= await fetch(`/reject/${id}`,{
-          method:"PUT",
-          headers:{
-            "Content-Type":"application/json"
-        },
-          body:JSON.stringify({ })
-        })
+        const res3 = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/reject/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+          }
+        );
         const data3= res3.json();
         console.log(data3)
       

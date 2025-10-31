@@ -38,7 +38,7 @@ const HororDetails = () => {
             formData.append('user_id', newUser.user_id);
             formData.append('user_dob', newUser.user_dob);
             formData.append('user_sunsign', newUser.user_sunsign);
-        axios.post('http://localhost:8003/kundali_router/add/', formData)
+        axios.post('/kundali_router/add/', formData)
             .then(res => {
                 console.log(res);
                 toast.success("kundali Uploaded");

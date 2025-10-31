@@ -43,17 +43,19 @@ const Resetpass = () => {
       }
       else
       {
-          const res2 = await fetch(`/update_pass/${id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(
-              {
-                newpass,confirmnewpass
-              })
-      
-          });
+          const res2 = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/update_pass/${id}`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                newpass,
+                confirmnewpass,
+              }),
+            }
+          );
       
         const data2 = res2.json();
         console.log(data2);

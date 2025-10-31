@@ -8,12 +8,15 @@ export const Religion = () => {
 
   
   const deletereligion= async(id,r)=>{
-    const res2 =await fetch(`/delete_religion/${id}/${r}`,{
-      method:"DELETE",
-      headers:{
-        "Content-Type":"application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/delete_religion/${id}/${r}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
 
   const deletedata= await res2.json();
   console.log(deletedata);
@@ -44,13 +47,16 @@ export const Religion = () => {
 
         }
         else {
-            const res = await fetch('/add_r', {
+            const res = await fetch(
+              `${process.env.REACT_APP_BACKEND_URL}/add_r`,
+              {
                 method: "POST",
                 headers: {
-                    "content-Type": "application/json"
+                  "content-Type": "application/json",
                 },
-                body: JSON.stringify({ name })
-            });
+                body: JSON.stringify({ name }),
+              }
+            );
 
             const data = await res.json();
             console.log(data);
@@ -68,12 +74,15 @@ export const Religion = () => {
   const [pageCount1,setPageCount1]=useState(0);
   const [religion, setreligionlist] = useState([])
   const getdata = async () => {
-    const res2 = await fetch('/getallreligion', {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getallreligion`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
       }
-    });
+    );
 
     const data2 = await res2.json();
     console.log(data2);

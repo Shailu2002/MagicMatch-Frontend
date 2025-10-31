@@ -4,7 +4,6 @@ import Navbarg from './Navbarg';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';//to handle form
 import { ToastContainer, toast } from 'react-toastify';
-
 const Signup = () => {
   const history = new useNavigate();
   const genotp1 = (Math.floor(Math.random() * (99 - 10 + 1)) + 10).toString();
@@ -34,17 +33,24 @@ const Signup = () => {
   validationSchema:validationSchema,
     onSubmit: async (values) => {
       const { user_id, user_date, user_email, user_contact, user_pass, user_cpass,activeStatus } = values;
-      const sign = await fetch("/user_signup1", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-         user_id,user_date,user_email,user_contact,user_pass,user_cpass,activeStatus
-
-        })
-      
-      });
+      const sign = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/user_signup1`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id,
+            user_date,
+            user_email,
+            user_contact,
+            user_pass,
+            user_cpass,
+            activeStatus,
+          }),
+        }
+      );
     
                 const resp = await sign.json();
                 if (sign.status === 404 || !resp) {

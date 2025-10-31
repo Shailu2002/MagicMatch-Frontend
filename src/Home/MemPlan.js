@@ -49,13 +49,21 @@ export const MemPlan = () => {
           alert("enter description")
         }
         else{
-        const plan= await fetch('/Plan',{
-              method:"POST",
-              headers:{
-                  "content-Type":"application/json"
-              },
-              body:JSON.stringify({P_name,P_duration,P_op,P_amount,P_discount,P_description,enable})
-          });
+        const plan = await fetch(`${process.env.REACT_APP_BACKEND_URL}/Plan`, {
+          method: "POST",
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            P_name,
+            P_duration,
+            P_op,
+            P_amount,
+            P_discount,
+            P_description,
+            enable,
+          }),
+        });
 
           const data=await plan.json();
           console.log(data);
@@ -71,11 +79,11 @@ export const MemPlan = () => {
     //all Plans
     const [getpdata,setpdata]=useState([])
     const getdata=async(e)=>{
-      const res= await fetch('/getplan',{
-          method:"GET",
-          headers:{
-              "content-Type":"application/json"
-          }
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/getplan`, {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
       });
 
       const data1=await res.json();
@@ -91,12 +99,15 @@ export const MemPlan = () => {
 
   const deleteplan=async (id) => {
 
-const res4= await fetch(`/deleteplan/${id}`,{
-  method:"DELETE",
-  headers:{
-    "Content-Type":"application/json"
+const res4 = await fetch(
+  `${process.env.REACT_APP_BACKEND_URL}/deleteplan/${id}`,
+  {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
   }
-});
+);
 const dplan=await res4.json();
 if(dplan.status === 422 || !dplan){
   alert("error")
@@ -110,26 +121,32 @@ else{
 
 
   const udata = async (id) => {
-    const res3 = await fetch(`/enable/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({})
-    })
+    const res3 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/enable/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      }
+    );
     const data3 = res3.json();
     console.log(data3)
 
   };
 
   const handleReject = async (id) => {
-    const res3 = await fetch(`/disable/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({})
-    })
+    const res3 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/disable/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      }
+    );
     const data3 = res3.json();
     console.log(data3)
 

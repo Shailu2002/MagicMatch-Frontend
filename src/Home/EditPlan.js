@@ -19,12 +19,15 @@ export const EditPlan = () => {
 
 
     const getdata1=async()=>{
-    const res2= await fetch(`/getplan/${id}`,{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getplan/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data2=await res2.json();
     console.log(data2);
@@ -36,18 +39,27 @@ export const EditPlan = () => {
         
     }
 }
-
-
 const udata=async(e)=>{
  e.preventDefault();
   const {P_name,P_duration,P_op,P_amount,P_discount,P_description,enable}=inpval;
-  const res3= await fetch(`/updateplan/${id}`,{
-    method:"PATCH",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body:JSON.stringify({P_name,P_duration,P_op,P_amount,P_discount,P_description,enable})
-  })
+  const res3 = await fetch(
+    `${process.env.REACT_APP_BACKEND_URL}/updateplan/${id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        P_name,
+        P_duration,
+        P_op,
+        P_amount,
+        P_discount,
+        P_description,
+        enable,
+      }),
+    }
+  );
   const data3= res3.json();
   if(!data3 || data3.status === 422){
 alert("fill all data")

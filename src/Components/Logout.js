@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
- import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const Logout = () => {
-   const history = new useNavigate();
+   const history =  useNavigate();
   useEffect(async() =>
   {
     console.log("before api");
-    const res = await fetch('/logout', {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
       method: "GET",
       headers: {
-        "content-Type": "application/json"
-      }
+        "content-Type": "application/json",
+      },
     });
     console.log("aftera api")
     const data = await res.json();

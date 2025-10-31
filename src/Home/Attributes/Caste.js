@@ -5,20 +5,21 @@ import 'react-tooltip/dist/react-tooltip.css';
 import { ToastContainer, toast,Flip } from 'react-toastify';
 import { Tooltip } from 'react-tooltip';
 export const Caste = () => {
-
-    
     const [pageData1,setPageData1]= useState([])
     const [page1,setPage1]=useState(1);
     const [pageCount1,setPageCount1]=useState(0);
     const [caste, setcastelist] = useState([])
     const [getr, setr] = useState([])
     const getdata = async () => {
-        const res2 = await fetch('/getreligion', {
+        const res2 = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/getreligion`,
+          {
             method: "GET",
             headers: {
-                "content-Type": "application/json"
-            }
-        });
+              "content-Type": "application/json",
+            },
+          }
+        );
 
         const data2 = await res2.json();
         console.log(data2);
@@ -55,13 +56,16 @@ export const Caste = () => {
             toast.error("enter religion name");
         }
         else {
-            const res = await fetch('/add_caste', {
+            const res = await fetch(
+              `${process.env.REACT_APP_BACKEND_URL}/add_caste`,
+              {
                 method: "POST",
                 headers: {
-                    "content-Type": "application/json"
+                  "content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, religion })
-            });
+                body: JSON.stringify({ name, religion }),
+              }
+            );
 
             const data = await res.json();
             console.log(data);
@@ -76,12 +80,15 @@ export const Caste = () => {
 
     
   const getdata1 = async () => {
-    const res2 = await fetch('/getallcaste', {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getallcaste`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
       }
-    });
+    );
 
     const data2 = await res2.json();
     console.log(data2);
@@ -123,12 +130,15 @@ export const Caste = () => {
 
    
   const deletecaste = async(id)=>{
-    const res2 =await fetch(`/delete_caste/${id}`,{
-      method:"DELETE",
-      headers:{
-        "Content-Type":"application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/delete_caste/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
 
   const deletedata= await res2.json();
   console.log(deletedata);

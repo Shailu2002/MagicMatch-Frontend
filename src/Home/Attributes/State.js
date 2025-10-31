@@ -12,12 +12,15 @@ export const State = () => {
     const [state, setstatelist] = useState([])
     const [getc,setc]=useState([])
     const getdata=async()=>{
-        const res2= await fetch('/getcountry',{
-            method:"GET",
-            headers:{
-                "content-Type":"application/json"
-            }
-        });
+        const res2 = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/getcountry`,
+          {
+            method: "GET",
+            headers: {
+              "content-Type": "application/json",
+            },
+          }
+        );
     
         const data2=await res2.json();
         console.log(data2);
@@ -55,13 +58,16 @@ export const State = () => {
             toast.error("enter countrycode");
         }
         else {
-            const res = await fetch('/add_s', {
+            const res = await fetch(
+              `${process.env.REACT_APP_BACKEND_URL}/add_s`,
+              {
                 method: "POST",
                 headers: {
-                    "content-Type": "application/json"
+                  "content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, countrycode })
-            });
+                body: JSON.stringify({ name, countrycode }),
+              }
+            );
 
             const data = await res.json();
             console.log(data);
@@ -76,12 +82,15 @@ export const State = () => {
 
      
   const getdata1 = async () => {
-    const res2 = await fetch('/getallstate', {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getallstate`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
       }
-    });
+    );
 
     const data2 = await res2.json();
     console.log(data2);
@@ -133,12 +142,15 @@ export const State = () => {
     }
     
     const deletestate = async(id,s)=>{
-      const res2 =await fetch(`/delete_state/${id}/${s}`,{
-        method:"DELETE",
-        headers:{
-          "Content-Type":"application/json"
+      const res2 = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/delete_state/${id}/${s}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
   
     const deletedata= await res2.json();
     console.log(deletedata);

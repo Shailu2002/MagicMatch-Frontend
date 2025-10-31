@@ -28,12 +28,15 @@ const MatchCard = ({ users,iduser }) => {
        
     
         const uind = (localStorage.getItem("luser_id"));
-        const res = await fetch(`/getalldetails_data/${uind}`, {
-        method: "GET",
-        headers: {
-          "content-type":"application/json"
-        }
-          });
+        const res = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/getalldetails_data/${uind}`,
+          {
+            method: "GET",
+            headers: {
+              "content-type": "application/json",
+            },
+          }
+        );
         const data = await res.json();
         if (!data || res.status === 404) {
             toast.error("Something Went Wrong");
@@ -160,17 +163,29 @@ const MatchCard = ({ users,iduser }) => {
                                                             let to_uid = element.user_id;
                                                             console.log(to_uid);
                                                             const { user_id,message_sent, sent_date, sent_invitation_status,message_reply,reply_date } = getuserdata;
-                                                            const sign = await fetch("/interest_sent", {
-                                                                method: "POST",
-                                                                headers: {
-                                                                    "Content-Type": "application/json"
-                                                                },
-                                                                body: JSON.stringify({
-                                                                  user_id,to_uid,message_sent,sent_date,sent_invitation_status,message_reply,reply_date
-                                                        
-                                                                })
-                                                              
-                                                            });
+                                                            const sign =
+                                                              await fetch(
+                                                                `${process.env.REACT_APP_BACKEND_URL}/interest_sent`,
+                                                                {
+                                                                  method:
+                                                                    "POST",
+                                                                  headers: {
+                                                                    "Content-Type":
+                                                                      "application/json",
+                                                                  },
+                                                                  body: JSON.stringify(
+                                                                    {
+                                                                      user_id,
+                                                                      to_uid,
+                                                                      message_sent,
+                                                                      sent_date,
+                                                                      sent_invitation_status,
+                                                                      message_reply,
+                                                                      reply_date,
+                                                                    }
+                                                                  ),
+                                                                }
+                                                              );
         
                                                             const resp = await sign.json();
                                                             console.log(resp);

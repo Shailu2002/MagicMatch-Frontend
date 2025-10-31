@@ -28,12 +28,15 @@ const EditPersonal = () => {
   const [language,setlanguage]=useState([]);
   console.log(aid);
   const getlang=async()=>{
-    const res2= await fetch('/getalllanguage',{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getalllanguage`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data2=await res2.json();
     console.log(data2);
@@ -49,12 +52,15 @@ const EditPersonal = () => {
   const [countryList, setcountryList] = useState([]);
 
   const getdatac=async()=>{
-    const res2= await fetch('/getcountry',{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getcountry`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data2=await res2.json();
     console.log(data2);
@@ -67,12 +73,15 @@ const EditPersonal = () => {
     }
 }
   const getdata1=async(countrycode)=>{
-    const res2= await fetch(`/getstate/${countrycode}`,{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getstate/${countrycode}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data2=await res2.json();
     console.log(data2);
@@ -85,12 +94,15 @@ const EditPersonal = () => {
     }
   }
   const getdata2=async(statecode)=>{
-    const res3= await fetch(`/getcity/${statecode}`,{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res3 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getcity/${statecode}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data3=await res3.json();
     console.log(data3);
@@ -107,12 +119,15 @@ const EditPersonal = () => {
    
 
   const getdata3=async()=>{
-    const res2= await fetch('/getreligion',{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getreligion`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data2=await res2.json();
     console.log(data2);
@@ -126,12 +141,15 @@ const EditPersonal = () => {
 }
   
   const getdata4=async(religioncode)=>{
-    const res3= await fetch(`/getcaste/${religioncode}`,{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res3 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getcaste/${religioncode}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data3=await res3.json();
     console.log(data3);
@@ -183,16 +201,26 @@ const EditPersonal = () => {
         toast.error("enter Religion");
         }
       else {
-          const res2 = await fetch(`/update_personal/${aid}`, {
-          method: "PATCH",
-          headers: {
-            "content-Type":"application/json"
-          },
-          body: JSON.stringify({
-            user_age,user_religion,user_caste,user_marital,user_mtongue,user_about_yourself,user_country,user_state,user_city
-          })
-          
-        });
+          const res2 = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/update_personal/${aid}`,
+            {
+              method: "PATCH",
+              headers: {
+                "content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                user_age,
+                user_religion,
+                user_caste,
+                user_marital,
+                user_mtongue,
+                user_about_yourself,
+                user_country,
+                user_state,
+                user_city,
+              }),
+            }
+          );
 
         const data2 = res2.json();
         console.log("upadte personal",data2);
@@ -212,13 +240,14 @@ const EditPersonal = () => {
     
   });
   const getdata = async () => {
-    const res = await fetch(`/getpersonaldata/${uid}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getpersonaldata/${uid}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-
-    }
     );
     
     const datas = await res.json();

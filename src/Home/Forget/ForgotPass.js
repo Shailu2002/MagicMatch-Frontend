@@ -37,16 +37,18 @@ const ForgotPass = () => {
           toast.warning("Enter a Valid Email")  
             }
         else {
-            const sign = await fetch("/check_email", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                user_email
-              })
-            
-            });
+            const sign = await fetch(
+              `${process.env.REACT_APP_BACKEND_URL}/check_email`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  user_email,
+                }),
+              }
+            );
           
                       const resp = await sign.json();
                       if (sign.status === 404 || !resp) {

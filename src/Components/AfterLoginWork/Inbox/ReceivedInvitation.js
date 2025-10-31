@@ -20,11 +20,11 @@ const ReceivedInvitation = () => {
   const uind = (localStorage.getItem("luser_id"));
     async function getdata1()
     {
-        return await axios.get(`http://localhost:8003/getreceived/${uind}`);
+        return await axios.get(`/getreceived/${uind}`);
     }
     async function getdata2()
     {
-        return await axios.get(`http://localhost:8003/getreceived_details/${uind}`);
+        return await axios.get(`/getreceived_details/${uind}`);
   }
   
   
@@ -145,15 +145,20 @@ const ReceivedInvitation = () => {
                                 let e1 = interest[index].user_id
                                 const { message_reply, reply_date } = getuserdata;
                                 console.log(e1, statust);
-                                 fetch(`/update_interest/${e1}/${uind}`, {
-                                  method: "PATCH",
-                                  headers: {
-                                    "content-Type":"application/json"
-                                  },
-                                  body: JSON.stringify({
-                                  statust,message_reply,reply_date   
-                                  })
-                                });
+                                 fetch(
+                                   `${process.env.REACT_APP_BACKEND_URL}/update_interest/${e1}/${uind}`,
+                                   {
+                                     method: "PATCH",
+                                     headers: {
+                                       "content-Type": "application/json",
+                                     },
+                                     body: JSON.stringify({
+                                       statust,
+                                       message_reply,
+                                       reply_date,
+                                     }),
+                                   }
+                                 );
                               
                                 form.current.user_email.value = element.contact[0].user_email;
                                 form.current.user_name.value = localStorage.getItem("name") + "("+ localStorage.getItem("luser_id")+")";
@@ -179,19 +184,24 @@ const ReceivedInvitation = () => {
                                 const { reply_date } = getuserdata;
                          
                                   console.log(e1,statust)
-                                  fetch(`/update_interest/${e1}/${uind}`, {
-                                    method: "PATCH",
-                                    headers: {
-                                      "content-Type":"application/json"
-                                    },
-                                    body: JSON.stringify({
-                                    statust,message_reply,reply_date  
-                                    })
-                                  });
+                                  fetch(
+                                    `${process.env.REACT_APP_BACKEND_URL}/update_interest/${e1}/${uind}`,
+                                    {
+                                      method: "PATCH",
+                                      headers: {
+                                        "content-Type": "application/json",
+                                      },
+                                      body: JSON.stringify({
+                                        statust,
+                                        message_reply,
+                                        reply_date,
+                                      }),
+                                    }
+                                  );
                                 form.current.user_email.value = element.contact[0].user_email;
                                 form.current.user_name.value = localStorage.getItem("name") + localStorage.getItem("luser_id");
                                 form.current.send_name.value = element.user_name;
-                                form.current.message.value = "rejected your Invitation to connect ❌";
+                                form.current.message.value = "rejected your Invitation to connect ";
                                 emailjs.sendForm('service_442j1ys', 'template_ouh4lmh', form.current, 'DA8BgdQHSMf19mJov')
                                                     .then((result) => {
                                                         console.log(result.text);

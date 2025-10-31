@@ -7,12 +7,15 @@ import { Tooltip } from 'react-tooltip';
 export const City = () => {
 
   const deletecity = async(id)=>{
-    const res2 =await fetch(`/delete_city/${id}`,{
-      method:"DELETE",
-      headers:{
-        "Content-Type":"application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/delete_city/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
 
   const deletedata= await res2.json();
   console.log(deletedata);
@@ -30,12 +33,15 @@ export const City = () => {
     const [getc, setc] = useState([])
     const [gets, sets] = useState([])
     const getdata = async () => {
-        const res2 = await fetch('/getcountry', {
+        const res2 = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/getcountry`,
+          {
             method: "GET",
             headers: {
-                "content-Type": "application/json"
-            }
-        });
+              "content-Type": "application/json",
+            },
+          }
+        );
 
         const data2 = await res2.json();
         console.log(data2);
@@ -49,12 +55,15 @@ export const City = () => {
     }
 
     const getdata1 = async (countrycode) => {
-        const res2 = await fetch(`/getstate/${countrycode}`, {
+        const res2 = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/getstate/${countrycode}`,
+          {
             method: "GET",
             headers: {
-                "content-Type": "application/json"
-            }
-        });
+              "content-Type": "application/json",
+            },
+          }
+        );
 
         const data2 = await res2.json();
         console.log(data2);
@@ -97,13 +106,16 @@ export const City = () => {
            toast.error("enter statecode");
         }
         else {
-            const res = await fetch('/add_city', {
+            const res = await fetch(
+              `${process.env.REACT_APP_BACKEND_URL}/add_city`,
+              {
                 method: "POST",
                 headers: {
-                    "content-Type": "application/json"
+                  "content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, statecode, countrycode })
-            });
+                body: JSON.stringify({ name, statecode, countrycode }),
+              }
+            );
 
             const data = await res.json();
             console.log(data);
@@ -117,12 +129,15 @@ export const City = () => {
     }
 
     const getdata2 = async () => {
-        const res2 = await fetch('/getallcity', {
-          method: "GET",
-          headers: {
-            "content-Type": "application/json"
+        const res2 = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/getallcity`,
+          {
+            method: "GET",
+            headers: {
+              "content-Type": "application/json",
+            },
           }
-        });
+        );
     
         const data2 = await res2.json();
         console.log(data2);

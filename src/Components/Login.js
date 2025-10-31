@@ -6,7 +6,6 @@ import { useFormik } from 'formik';
 import { toast, ToastContainer } from 'react-toastify';
 import * as yup from 'yup';
 const Login = () => {
-  
     const [ip_address,setIP] = useState('');
     const history = new useNavigate();
     const defaultValues = {
@@ -24,15 +23,21 @@ const Login = () => {
   validationSchema:validationSchema,
     onSubmit: async (values) => {
         const { user_email,user_password,login_date } = values;
-        const sign = await fetch("/check_user_login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            user_email,user_password,ip_address,login_date
-          })
-        });
+        const sign = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/check_user_login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              user_email,
+              user_password,
+              ip_address,
+              login_date,
+            }),
+          }
+        );
       const resp = await sign.json();
       console.log(resp.user_id);
       if (sign.status === 200)
@@ -48,11 +53,11 @@ const Login = () => {
       }
       else if (sign.status === 201)
       {
-        toast.error("Wrong Password ❌");
+        toast.error("Wrong Password");
       }
       else if (sign.status === 401)
       {
-        toast.error("Wrong Mail id ❌");
+        toast.error("Wrong Mail id");
       }
       else
       {

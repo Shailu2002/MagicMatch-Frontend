@@ -95,16 +95,8 @@ const SuccessStory = () => {
                         {
                             toast.error("something went wrong");
                         }
-                    });
-            
-              
-                  
-            
-                  
-                  
+                    });   
               }
-          
-       
         }//onsubmit end here
         
       });

@@ -11,12 +11,15 @@ export const Table2 = ({details}) => {
 
  
   const deleteuser = async(id)=>{
-    const res2 =await fetch(`/delete_user/${id}`,{
-      method:"DELETE",
-      headers:{
-        "Content-Type":"application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/delete_user/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
 
   const deletedata= await res2.json();
   console.log(deletedata);
@@ -28,12 +31,15 @@ export const Table2 = ({details}) => {
   }
 }
   const deleteuser1 = async(id)=>{
-    const res2 =await fetch(`/deletedetail/${id}`,{
-      method:"DELETE",
-      headers:{
-        "Content-Type":"application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/deletedetail/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
 
   const deletedata= await res2.json();
   console.log(deletedata);
@@ -47,26 +53,32 @@ export const Table2 = ({details}) => {
   
   const Astats = async (id) => {
     console.log(id);
-    const res3 = await fetch(`/activate_status/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({})
-    })
+    const res3 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/activate_status/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      }
+    );
     const data3 = res3.json();
     console.log(data3)
 
   };
 
   const Dstats = async (id) => {
-    const res4 = await fetch(`/deactivate_status/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({})
-    })
+    const res4 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/deactivate_status/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      }
+    );
     const data4 = res4.json();
     
     console.log(data4)

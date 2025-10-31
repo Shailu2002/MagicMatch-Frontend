@@ -30,12 +30,15 @@ const User_Profile = () => {
     const getdata = async () =>
     {
 
-      const res = await fetch(`/getalldetails_data/${uind}`, {
-        method: "GET",
-        headers: {
-          "content-type":"application/json"
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/getalldetails_data/${uind}`,
+        {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
         }
-      });
+      );
       const data = await res.json();
     
         if (!data || res.status === 404)

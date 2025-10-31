@@ -7,12 +7,15 @@ const SearchbyId = () => {
   const [gender, setgender] = useState();
   const [getsearchdata, setsearchdata] = useState([])
   const getdata = async () => {
-    const res = await fetch(`/searchID/${ID}/${gender}`, {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json"
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/searchID/${ID}/${gender}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
       }
-    });
+    );
     const data = await res.json();
     console.log(data);
     if (!data || res.status === 404) {

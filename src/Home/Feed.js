@@ -8,12 +8,15 @@ export const Feed = () => {
 
   const [getfeedback,setfeedback]=useState([])
   const getdata=async()=>{
-          const res= await fetch('/feedback',{
-              method:"GET",
-              headers:{
-                  "content-Type":"application/json"
-              }
-          });
+          const res = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/feedback`,
+            {
+              method: "GET",
+              headers: {
+                "content-Type": "application/json",
+              },
+            }
+          );
  
           const data=await res.json();
           console.log(data);

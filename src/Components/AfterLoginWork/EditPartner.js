@@ -26,12 +26,15 @@ const EditPartner = () => {
   };
   const [mother_tongue,setmother_tongue]=useState([])
   const getlang=async()=>{
-    const res2= await fetch('/getlanguage',{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getlanguage`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -52,12 +55,15 @@ const [partner_city,setcity]=useState([]);
   const [citylist, setcityList] = useState([]);
   
   const getdatacountry=async()=>{
-    const res2= await fetch('/getcountry',{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getcountry`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -72,12 +78,15 @@ const [partner_city,setcity]=useState([]);
     return data2;
 }
   const getdata1=async(countrycode)=>{
-    const res2= await fetch(`/getstateall/${countrycode}`,{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getstateall/${countrycode}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -99,12 +108,15 @@ const [partner_city,setcity]=useState([]);
     return data2;
 }
   const getdata2=async(statecode)=>{
-    const res3= await fetch(`/getcityall/${statecode}`,{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res3 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getcityall/${statecode}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const data3=await res3.json();
     console.log(data3);
     if(!data3 || res3.status === 404){
@@ -128,12 +140,15 @@ const [partner_city,setcity]=useState([]);
 } 
   const [religionList, setreligionList] = useState([]);
   const getdata3=async()=>{
-    const res2= await fetch('/getreligion',{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getreligion`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -149,12 +164,14 @@ const [partner_city,setcity]=useState([]);
  
   const getdata = async (count) => {
      console.log(count);
-    const res = await fetch(`/getpartnerdata/${uid}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getpartnerdata/${uid}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    }
     );
     const datas = await res.json();
     console.log(datas);
@@ -278,16 +295,31 @@ const [partner_city,setcity]=useState([]);
         }
         else {
   
-          const res2 = await fetch(`/update_partner/${uid}`, {
-            method: "PATCH",
-            headers: {
-              "content-Type":"application/json"
-            },
-            body: JSON.stringify({
-         partner_min_age, partner_max_age, partner_min_height, partner_max_height, partner_marital_status, partner_religion,
-        partner_diet,partner_mtongue,partner_highest_qualification,partner_working_with,partner_profession,partner_country,partner_state,partner_city
-            })
-          });
+          const res2 = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/update_partner/${uid}`,
+            {
+              method: "PATCH",
+              headers: {
+                "content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                partner_min_age,
+                partner_max_age,
+                partner_min_height,
+                partner_max_height,
+                partner_marital_status,
+                partner_religion,
+                partner_diet,
+                partner_mtongue,
+                partner_highest_qualification,
+                partner_working_with,
+                partner_profession,
+                partner_country,
+                partner_state,
+                partner_city,
+              }),
+            }
+          );
   
           const data2 = res2.json();
           

@@ -34,15 +34,27 @@ const QRpage = () => {
         onSubmit:async(values)  => {
           
           const { user_id,  transaction_id,total_amount,plan_name,plan_duration,approval_status,active_status,payment_date,amount_received,user_email_id } = values;
-          const pay = await fetch("/user_payment1", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                user_id, transaction_id,total_amount,plan_name,plan_duration,approval_status,active_status,payment_date,amount_received,user_email_id
-            })
-          }); 
+          const pay = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/user_payment1`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                user_id,
+                transaction_id,
+                total_amount,
+                plan_name,
+                plan_duration,
+                approval_status,
+                active_status,
+                payment_date,
+                amount_received,
+                user_email_id,
+              }),
+            }
+          ); 
           const resp = await pay.json();
           if (pay.status === 404 || !resp) {
             toast.error("Something went wrong!");

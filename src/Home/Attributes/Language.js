@@ -4,16 +4,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import 'react-tooltip/dist/react-tooltip.css';
 import { ToastContainer, toast,Flip } from 'react-toastify';
 import { Tooltip } from 'react-tooltip';
-export const Language = () => {
-
-  
+export const Language = () => { 
   const deletelanguage = async(id)=>{
-    const res2 =await fetch(`/delete_language/${id}`,{
-      method:"DELETE",
-      headers:{
-        "Content-Type":"application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/delete_language/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
 
   const deletedata= await res2.json();
   console.log(deletedata);
@@ -45,13 +46,16 @@ export const Language = () => {
           
       }
       else{
-      const res= await fetch('/add_language',{
-            method:"POST",
-            headers:{
-                "content-Type":"application/json"
-            },
-            body:JSON.stringify({name})
-        });
+      const res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/add_language`,
+        {
+          method: "POST",
+          headers: {
+            "content-Type": "application/json",
+          },
+          body: JSON.stringify({ name }),
+        }
+      );
 
         const data=await res.json();
         console.log(data);
@@ -70,12 +74,15 @@ export const Language = () => {
   const [pageCount1,setPageCount1]=useState(0);
   const [languagelist, setlanguagelist] = useState([])
   const getdata = async () => {
-    const res2 = await fetch('/getalllanguage', {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getalllanguage`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
       }
-    });
+    );
 
     const data2 = await res2.json();
     console.log(data2);

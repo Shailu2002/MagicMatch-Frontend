@@ -25,13 +25,16 @@ export const Signin = () => {
             alert("enter the details")
         }
         else{
-            const signin= await fetch("/signin",{
-                method:"POST",
-                headers:{
-                    "content-Type":"application/json"
+            const signin = await fetch(
+              `${process.env.REACT_APP_BACKEND_URL}/signin`,
+              {
+                method: "POST",
+                headers: {
+                  "content-Type": "application/json",
                 },
-                body:JSON.stringify({email,password})
-            });
+                body: JSON.stringify({ email, password }),
+              }
+            );
             const res=await signin.json();
             console.log(res);
           

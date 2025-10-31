@@ -66,18 +66,24 @@ const GeneralInfo = () => {
         else
         {
       const { user_id, user_height, user_blood_group, user_body_type, user_complexion,user_diet } = values;
-        const sign = await fetch("/user_general", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-                
-            user_id, user_height, user_blood_group, user_body_type, user_complexion,user_diet,user_hobbies
-    
-          })
-          
-        });
+        const sign = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/user_general`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              user_id,
+              user_height,
+              user_blood_group,
+              user_body_type,
+              user_complexion,
+              user_diet,
+              user_hobbies,
+            }),
+          }
+        );
                  
         const resp = await sign.json();
         if (sign.status === 404 || !resp) {
@@ -180,10 +186,6 @@ const GeneralInfo = () => {
                   </div>
                 {  formik.touched.user_diet && formik.errors.user_diet ? (<div className='text-danger mb-3'>{formik.errors.user_diet}</div>) : null} 
                 </div> 
-                
-                
-                
-                
                 <div className='mb-3'>
                   <label>Hobbies/Interests</label>
                   <div>

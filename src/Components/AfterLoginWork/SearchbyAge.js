@@ -7,12 +7,15 @@ const SearchbyAge = () => {
   const [getsearchdata, setsearchdata] = useState([])
   const [gender, setgender] = useState();
   const getdata = async () => {
-    const res = await fetch(`/searchage/${Age}/${gender}`, {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json"
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/searchage/${Age}/${gender}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
       }
-    });
+    );
 
     const data = await res.json();
     console.log(data);

@@ -14,12 +14,15 @@ const Personal = () => {
   ];
   const [mother_tongue,setmother_tongue]=useState([])
   const getlang=async()=>{
-    const res2= await fetch('/getlanguage',{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getlanguage`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data2=await res2.json();
     console.log(data2);
@@ -36,12 +39,15 @@ const Personal = () => {
   const [countryList, setcountryList] = useState([]);
 
   const getdata=async()=>{
-    const res2= await fetch('/getcountry',{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getcountry`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data2=await res2.json();
     console.log(data2);
@@ -56,12 +62,15 @@ const Personal = () => {
   const [user_state, setstate] = useState('');
   const [stateList, setstateList] = useState([]);
   const getdata1=async(countrycode)=>{
-    const res2= await fetch(`/getstate/${countrycode}`,{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getstate/${countrycode}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data2=await res2.json();
     console.log(data2);
@@ -76,12 +85,15 @@ const Personal = () => {
   const [user_city,setcity]=useState("");
   const [citylist, setcityList] = useState([]);
   const getdata2=async(statecode)=>{
-    const res3= await fetch(`/getcity/${statecode}`,{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res3 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getcity/${statecode}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data3=await res3.json();
     console.log(data3);
@@ -96,12 +108,15 @@ const Personal = () => {
   const [user_religion, setreligion] = useState("");
   const [religionList, setreligionList] = useState([]);
   const getdata3=async()=>{
-    const res2= await fetch('/getreligion',{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getreligion`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data2=await res2.json();
     console.log(data2);
@@ -116,12 +131,15 @@ const Personal = () => {
   const [user_caste, setcaste] = useState("");
   const [castelist, setcastelist] = useState([]);
   const getdata4=async(religioncode)=>{
-    const res3= await fetch(`/getcaste/${religioncode}`,{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res3 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getcaste/${religioncode}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const data3=await res3.json();
     console.log(data3);
     if(!data3 || res3.status === 404){
@@ -192,18 +210,32 @@ const Personal = () => {
         }
       else
       {
-        const sign = await fetch("/user_personal", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-                
-            user_id, user_name,user_age,user_gender,user_religion,user_caste,user_marital,user_mtongue,user_about_yourself,user_premium_status,user_no_of_invitation_sent,user_no_of_invitation_received,user_country,user_state,user_city
-    
-          })
-          
-        });
+        const sign = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/user_personal`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              user_id,
+              user_name,
+              user_age,
+              user_gender,
+              user_religion,
+              user_caste,
+              user_marital,
+              user_mtongue,
+              user_about_yourself,
+              user_premium_status,
+              user_no_of_invitation_sent,
+              user_no_of_invitation_received,
+              user_country,
+              user_state,
+              user_city,
+            }),
+          }
+        );
                  
         const resp = await sign.json();
         if (sign.status === 404 || !resp) {

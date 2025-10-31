@@ -10,12 +10,15 @@ export const View = () => {
   console.log(id);
 const [inpval,setINP]=useState([])
   const getdata=async()=>{
-    const res2= await fetch(`/getpersonal/${id}`,{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getpersonal/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || data2.status === 404){

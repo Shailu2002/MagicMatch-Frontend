@@ -12,12 +12,15 @@ export const Amember = () => {
 
   const [getuserdata,setuserdata]=useState([])
  const getdata=async()=>{
-         const res= await fetch(`/user_details?search=${search}&page=${page}`,{
-             method:"GET",
-             headers:{
-                 "content-Type":"application/json"
-             }
-         });
+         const res = await fetch(
+           `${process.env.REACT_APP_BACKEND_URL}/user_details?search=${search}&page=${page}`,
+           {
+             method: "GET",
+             headers: {
+               "content-Type": "application/json",
+             },
+           }
+         );
 
          const data=await res.json();
          console.log(data);

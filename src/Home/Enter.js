@@ -11,12 +11,15 @@ export const Enter = () => {
     console.log(id);
     const [getamount, setamount] = useState([])
     const getdata = async () => {
-        const res2 = await fetch(`/user_amount/${id}`, {
+        const res2 = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/user_amount/${id}`,
+          {
             method: "GET",
             headers: {
-                "content-Type": "application/json"
-            }
-        });
+              "content-Type": "application/json",
+            },
+          }
+        );
         const data2 = await res2.json();
         console.log(data2);
         if (!data2 || data2.status === 404) {
@@ -50,13 +53,16 @@ export const Enter = () => {
             alert("amount cannot be greater than total amount")
         }
         else {
-            const res3 = await fetch(`/Eamount/${id}`, {
+            const res3 = await fetch(
+              `${process.env.REACT_APP_BACKEND_URL}/Eamount/${id}`,
+              {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "application/json"
+                  "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ amount_received })
-            })
+                body: JSON.stringify({ amount_received }),
+              }
+            );
             const data3 = res3.json();
             console.log(data3)
             if(res3.status===200 && data3){

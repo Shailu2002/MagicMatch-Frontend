@@ -72,15 +72,23 @@ const EditGeneral = () => {
         else {
           const { user_height, user_blood_group, user_body_type, user_complexion, user_diet } = values;
 
-          const upsign = await fetch(`/update_general/${uid}`, {
-            method: "PATCH",
-            headers: {
-              "content-type":"application/json"
-            },
-            body: JSON.stringify({
-              user_height, user_blood_group, user_body_type, user_complexion, user_diet,user_hobbies
-            })
-          });
+          const upsign = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/update_general/${uid}`,
+            {
+              method: "PATCH",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({
+                user_height,
+                user_blood_group,
+                user_body_type,
+                user_complexion,
+                user_diet,
+                user_hobbies,
+              }),
+            }
+          );
     
        
           const res = upsign.json();
@@ -101,13 +109,14 @@ const EditGeneral = () => {
  
   const getdata = async () => {
 
-    const res = await fetch(`/getgeneraldata/${uid}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getgeneraldata/${uid}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-
-    }
     );
     
     const datas = await res.json();

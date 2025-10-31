@@ -7,12 +7,15 @@ const Membership = () => {
     const [plan, setplan] = useState([]);
     const getdata = async () =>
     {
-        const res = await fetch("/getallplans", {
+        const res = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/getallplans`,
+          {
             method: "GET",
             headers: {
-                'content-type':'application/json'
-            }
-        });
+              "content-type": "application/json",
+            },
+          }
+        );
 
         const data = await res.json();
         console.log(data.length);

@@ -37,18 +37,23 @@ validationSchema:validationSchema,
     const { user_id,user_highest_qualification,user_working_with,user_profession,user_annual_income,show_annual_income } = values;
     
     
-    const sign = await fetch("/user_education", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-            
-        user_id,user_highest_qualification,user_working_with,user_profession,user_annual_income,show_annual_income
-
-      })
-      
-    });
+    const sign = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/user_education`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id,
+          user_highest_qualification,
+          user_working_with,
+          user_profession,
+          user_annual_income,
+          show_annual_income,
+        }),
+      }
+    );
              
     const resp = await sign.json();
     if (sign.status === 404 || !resp) {

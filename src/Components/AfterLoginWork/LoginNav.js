@@ -19,12 +19,12 @@ const LoginNav = () => {
     localStorage.setItem("token", null);
     localStorage.clear();
 
-     const res = await fetch('/logout', {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json"
-      }
-    });
+     const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
+       method: "GET",
+       headers: {
+         "content-Type": "application/json",
+       },
+     });
     const data = await res.json();
     console.log(data);
     if (res.status==200)

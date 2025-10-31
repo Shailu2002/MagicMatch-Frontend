@@ -32,12 +32,12 @@ export const Country = () => {
       toast.error("enter iso code");
     }
     else {
-      const res = await fetch('/add_c', {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/add_c`, {
         method: "POST",
         headers: {
-          "content-Type": "application/json"
+          "content-Type": "application/json",
         },
-        body: JSON.stringify({ name, isCode })
+        body: JSON.stringify({ name, isCode }),
       });
 
       const data = await res.json();
@@ -53,12 +53,15 @@ export const Country = () => {
 
   const [country, setcountry] = useState([])
   const getdata = async () => {
-    const res2 = await fetch('/getallcountry', {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json"
+    const res2 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/getallcountry`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
       }
-    });
+    );
 
     const data2 = await res2.json();
     console.log(data2);
@@ -99,12 +102,15 @@ export const Country = () => {
     }, [country])
  
     const deletecountry = async(id,c)=>{
-      const res2 =await fetch(`/delete_country/${id}/${c}`,{
-        method:"DELETE",
-        headers:{
-          "Content-Type":"application/json"
+      const res2 = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/delete_country/${id}/${c}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
   
     const deletedata= await res2.json();
     console.log(deletedata);

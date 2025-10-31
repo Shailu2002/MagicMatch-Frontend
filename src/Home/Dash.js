@@ -8,17 +8,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import CachedTwoToneIcon from '@mui/icons-material/CachedTwoTone';
 import Charts from './Charts';
-
 export const Dash = () => {
-
-
-  const [getdash,setdash]=useState([])
+const [getdash,setdash]=useState([])
  const getdata1=async()=>{
-         const res= await fetch('/dash',{
-             method:"GET",
-             headers:{
-                 "content-Type":"application/json"
-             }
+         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/dash`, {
+           method: "GET",
+           headers: {
+             "content-Type": "application/json",
+           },
          });
 
          const data=await res.json();
@@ -44,12 +41,15 @@ export const Dash = () => {
   //creating registration api
   const [getuserdata,setuserdata]=useState([])
  const getdata=async(e)=>{
-         const res= await fetch('/user_signup',{
-             method:"GET",
-             headers:{
-                 "content-Type":"application/json"
-             }
-         });
+         const res = await fetch(
+           `${process.env.REACT_APP_BACKEND_URL}/user_signup`,
+           {
+             method: "GET",
+             headers: {
+               "content-Type": "application/json",
+             },
+           }
+         );
 
          const data=await res.json();
          console.log(data);
@@ -93,12 +93,15 @@ export const Dash = () => {
     //for login history table
   
   const getinfo=async(e)=>{
-    const res= await fetch('/user_signin',{
-        method:"GET",
-        headers:{
-            "content-Type":"application/json"
-        }
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/user_signin`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
+      }
+    );
 
     const data=await res.json();
     console.log(data);

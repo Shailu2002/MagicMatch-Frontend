@@ -11,12 +11,15 @@ export const View = () => {
     const [partnerdetails, setpartnerdetils] = useState([])
     const getdata1 = async () => {
         //partner preferences
-        const res3 = await fetch(`/getgeneral/${id}`, {
+        const res3 = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/getgeneral/${id}`,
+          {
             method: "GET",
             headers: {
-                "content-Type": "application/json"
-            }
-        });
+              "content-Type": "application/json",
+            },
+          }
+        );
         const data3 = await res3.json();
         console.log(data3);
         if (!data3 || res3.status === 404) {

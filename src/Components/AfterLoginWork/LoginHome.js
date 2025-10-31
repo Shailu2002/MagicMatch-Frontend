@@ -30,7 +30,7 @@ const LoginHome = () => {
       const formData = new FormData();
       formData.append('user_photo', newUser.user_photo);
       formData.append('user_id', newUser.user_id);
-      axios.put('http://localhost:8003/photo_router/add/', formData)
+      axios.put('/photo_router/add/', formData)
         .then(res => {
           console.log(res);
           toast.success("Photo Updated successfully");
@@ -63,12 +63,15 @@ const LoginHome = () => {
   const getdata = async () =>
   {
     const uind = localStorage.getItem("luser_id");
-    const res = await fetch(`/gethomedata/${uind}`, {
-      method: "GET",
-      headers: {
-        "content-type":"application/json"
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/gethomedata/${uind}`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+        },
       }
-    });
+    );
     const data = await res.json();
   
     if (!data || res.status === 404)

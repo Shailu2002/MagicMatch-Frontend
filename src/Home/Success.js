@@ -12,12 +12,15 @@ const Success = () => {
   const [getsuccessdata, setsuccessdata] = useState([])
   let f = 0
   const getdata = async () => {
-    const res = await fetch(`/success_story?filteruser=${filteruser}`, {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json"
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/success_story?filteruser=${filteruser}`,
+      {
+        method: "GET",
+        headers: {
+          "content-Type": "application/json",
+        },
       }
-    });
+    );
 
     const data = await res.json();
     console.log(data);
@@ -34,13 +37,16 @@ const Success = () => {
 
     toast.success("success story approved successfully!");
     setbtn(1);
-    const res3 = await fetch(`/approve_success/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({})
-    })
+    const res3 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/approve_success/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      }
+    );
 
     const data3 = res3.json();
     console.log(data3)
@@ -51,13 +57,16 @@ const Success = () => {
   const handleReject = async (id) => {
     toast.warn("you have rejected success story ");
     setbtn(-1);
-    const res3 = await fetch(`/reject_success/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({})
-    })
+    const res3 = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/reject_success/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      }
+    );
     setbtn(-1);
     const data3 = res3.json();
     console.log(data3)

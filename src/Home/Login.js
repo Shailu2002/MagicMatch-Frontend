@@ -22,18 +22,19 @@ export const Login = () => {
   validationSchema:validationSchema,
     onSubmit: async (values) => {
       const { email,password } = values;
-        const sign = await fetch("/signin", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-                
-            email,password
-    
-          })
-   
-        });         
+        const sign = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/signin`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email,
+              password,
+            }),
+          }
+        );         
       const resp = await sign.json();
       console.log(resp.user_id);
       console.log(resp.name);

@@ -19,13 +19,13 @@ const MyMatches = () => {
         {
             gender = "female";
         }
-        return await axios.get(`http://localhost:8003/getalldetails_match/${gender}`);
+        return await axios.get(`/getalldetails_match/${gender}`);
     }
     
     async function getdataios()
     {
         const uind = (localStorage.getItem("luser_id"));
-        return await axios.get(`http://localhost:8003/getalldetails_data/${uind}`);
+        return await axios.get(`/getalldetails_data/${uind}`);
     }
 
     const getdataown = async() =>

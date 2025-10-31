@@ -14,12 +14,12 @@ const SentInvitation = () => {
     async function getdata1()
     {
       
-        return await axios.get(`http://localhost:8003/getinterest/${uind}`);
+        return await axios.get(`/getinterest/${uind}`);
     }
     async function getdata2()
     {
       
-        return await axios.get(`http://localhost:8003/getinterest_details/${uind}`);
+        return await axios.get(`/getinterest_details/${uind}`);
   }
  
   

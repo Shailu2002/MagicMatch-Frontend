@@ -32,16 +32,22 @@ validationSchema:validationSchema,
 
     const { user_highest_qualification, user_working_with, user_profession, user_annual_income, show_annual_income } = values;
 
-    const res = await fetch(`/update_educational/${uid}`,
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/update_educational/${uid}`,
       {
-      method: "PATCH",
-      headers: {
-        "content-type":"application/json"
-      },
-      body: JSON.stringify({
-        user_highest_qualification, user_working_with, user_profession, user_annual_income, show_annual_income
-      })
-    });
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          user_highest_qualification,
+          user_working_with,
+          user_profession,
+          user_annual_income,
+          show_annual_income,
+        }),
+      }
+    );
  
     const data = res.json();
     if(!data||res.status===404)
@@ -57,12 +63,14 @@ validationSchema:validationSchema,
 });
   
   const getdata = async () => {
-    const res = await fetch(`/geteducationaldata/${uid}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+    const res = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/geteducationaldata/${uid}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    }
     );
     const datas = await res.json();
     console.log(datas);
