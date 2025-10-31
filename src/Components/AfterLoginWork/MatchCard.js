@@ -47,7 +47,9 @@ const MatchCard = ({ users,iduser }) => {
                 mess = mess + users[i].user_name + " (" + users[i].user_id + ")" + ",";
             }
            
-            form.current.message.value = mess;  
+            if (form.current && form.current.message) {
+              form.current.message.value = mess;
+            }
 
             if (counter == "1")
             {
