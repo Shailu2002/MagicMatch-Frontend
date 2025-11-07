@@ -74,7 +74,7 @@ const Signup = () => {
       <Navbarg />
   
   <div className='backg'>
-  <div className='container cardstyle' >
+  <div className=' responsive-width cardstyle' >
   <div class="card cardbg">
   <div class="card-body">
   <form >

@@ -26,10 +26,10 @@ const Navbarg = () => {
                              </li>
                           
             <li className='nav-item active'>
-           < Link to="/signup" style={{border:"2px solid white",borderRadius:"25px"}} className='nav-link nav-text text-white'><i class="fa-solid text-black fa-user-plus "></i> Sign Up</Link>
+           < Link to="/signup"  className='nav-link nav-text text-white'><i class="fa-solid text-black fa-user-plus "></i></Link>
            </li>  
           <li className='nav-item active'>
-          <Link to="/login" target="_blank" style={{border:"2px solid white",borderRadius:"25px"}} className='nav-link nav-text text-white'> <i class="fa-solid  text-black fa-right-to-bracket"></i> Login</Link>
+          <Link to="/login" target="_blank" className='nav-link nav-text text-white'> <i class="fa-solid  text-black fa-right-to-bracket"></i></Link>
                               </li>
                               </ul>
                            

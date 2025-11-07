@@ -109,7 +109,8 @@ const SuccessStory = () => {
         <h1 className="text-danger  heading1 pt-4 text-center">
           Thank You for Sharing your Story with us !
         </h1>
-        <div className="container cardstyle">
+        <div className=" responsive-width cardstyle">
+
           <div className="card cardbg">
             <div className="card-body card-mt">
               <p style={{ fontSize: "20px", color: "gray" }}>
@@ -127,8 +128,8 @@ const SuccessStory = () => {
                 encType="multipart/form-data"
                 onSubmit={formik.handleSubmit}
               >
-                <div className="row mb-4 ">
-                  <div className="col-sm-6">
+                <div className="row mb-4">
+                  <div className="col-sm-6 mb-2">
                     <input
                       type="text"
                       name="partner1_name"
@@ -164,7 +165,7 @@ const SuccessStory = () => {
                   </div>
                 </div>
                 <div className="row mb-4 ">
-                  <div className="col-sm-6">
+                  <div className="col-sm-6 mb-2">
                     <input
                       type="email"
                       name="partner1_mailid"

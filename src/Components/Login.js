@@ -80,7 +80,7 @@ const Login = () => {
     <>
       <Navbarg/>
       <div  className='backg'>
-      <div className='container cardstyle'>
+      <div className='responsive-width cardstyle'>
       <div className='card cardbg'>
       <div className="card-body card-mt">
       <div className='text-center'>
