@@ -1,8 +1,7 @@
-import React, { useEffect, useState,useRef } from 'react';
+import  {  useState } from 'react';
 // import emailjs from '@emailjs/browser';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import Navbar from './SignUpdetails/NavLogobar';
 const Otp = () => {
   const location = new useLocation();
   const otp = (location.state.genotp);
@@ -47,7 +46,6 @@ const Otp = () => {
   return (
  
     <>
-      <Navbar/>
            <div className='backg'>
           <div className='container cardstyle'>
           <div className='card cardbg'>

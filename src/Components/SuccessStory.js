@@ -105,7 +105,7 @@ const SuccessStory = () => {
   return (
     <>
       <Navbar />
-      <div className="backg">
+      <div style={{marginTop:"60px"}} className="backg">
         <h1 className="text-danger  heading1 pt-4 text-center">
           Thank You for Sharing your Story with us !
         </h1>

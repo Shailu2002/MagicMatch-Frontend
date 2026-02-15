@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate,useLocation } from 'react-router-dom';
-import Navbar from './SignUpdetails/NavLogobar';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 const Resetpass = () => {
@@ -56,31 +54,55 @@ const Resetpass = () => {
   });   
   return (
     <>
-      <Navbar/>
-    <div className='backg'>
-    <div className='responsive-width cardstyle' >
-    <div class="card cardbg">
-     <div class="card-body">
-     <form onSubmit={formik.handleSubmit}>
-    <h2 className=" heading1 text-center">Update Password</h2>
-    <div className="mb-3">
-    <label  className="form-label"> New Password</label>
-   <input name="user_pass" type="password" value={formik.values.user_pass} onChange={formik.handleChange} onBlur={formik.handleBlur} className="form-control" />
-    {formik.errors.user_pass && formik.touched.user_pass ? <div className='text-danger' >{formik.errors.user_pass}</div> : null}
-    </div>
-    <div className="mb-3">
-    <label  className="form-label"> Confirm New Password</label>
-                  <input type="password" name="user_cpass" value={formik.values.user_cpass} onChange={formik.handleChange} onBlur={formik.handleBlur} className="form-control" />
-                  {formik.errors.user_cpass && formik.touched.user_cpass ? <div className='text-danger' >{formik.errors.user_cpass}</div> : null}
+      <div style={{ marginTop: "60px" }} className="backg">
+        <div className="responsive-width cardstyle">
+          <div class="card cardbg">
+            <div class="card-body">
+              <form onSubmit={formik.handleSubmit}>
+                <h2 className=" heading1 text-center">Update Password</h2>
+                <div className="mb-3">
+                  <label className="form-label"> New Password</label>
+                  <input
+                    name="user_pass"
+                    type="password"
+                    value={formik.values.user_pass}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="form-control"
+                  />
+                  {formik.errors.user_pass && formik.touched.user_pass ? (
+                    <div className="text-danger">{formik.errors.user_pass}</div>
+                  ) : null}
                 </div>
-                <div className='text-center' >   
-                  <button type="submit" className="btn btn-primary">Update</button>
-                  <ToastContainer/>
-     </div>           
+                <div className="mb-3">
+                  <label className="form-label"> Confirm New Password</label>
+                  <input
+                    type="password"
+                    name="user_cpass"
+                    value={formik.values.user_cpass}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="form-control"
+                  />
+                  {formik.errors.user_cpass && formik.touched.user_cpass ? (
+                    <div className="text-danger">
+                      {formik.errors.user_cpass}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary">
+                    Update
+                  </button>
+                  <ToastContainer />
+                </div>
               </form>
-            </div> </div> </div> </div>
-      </>
-  )
+            </div>{" "}
+          </div>{" "}
+        </div>{" "}
+      </div>
+    </>
+  );
 }
 
 export default Resetpass;

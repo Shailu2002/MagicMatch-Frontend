@@ -83,46 +83,90 @@ const genipwork = async () => {
   
   return (
     <>
-      <Navbarg/>
-      <div  className='backg'>
-      <div className='responsive-width cardstyle'>
-      <div className='card cardbg'>
-      <div className="card-body card-mt">
-      <div className='text-center'>
-      <i class="fa-solid  fa-user logo"></i>
-      <h4 style={{ fontFamily: "cursive", margin: "20px" }}>Login</h4>
-      </div>
-      <form >
-      <div class="mb-3 ">
-       <label  class="form-label">Your Email <span className='text-danger'>*</span></label>
-   <input name="user_email" value={formik.values.user_email} onBlur={ formik.handleBlur}  onChange={formik.handleChange} type="email" class="form-control"  />
-   {  formik.touched.user_email && formik.errors.user_email ? (<div className='text-danger mb-3'>{formik.errors.user_email}</div>) : null}
-  </div>
-  <div class="mb-3">
-    <label class="form-label"> Password <span className='text-danger'>*</span></label>
-                  <input name="user_password" onBlur={formik.handleBlur} value={formik.values.user_password} onChange={formik.handleChange} type="password" class="form-control" />
-                  {  formik.touched.user_password && formik.errors.user_password ? (<div className='text-danger mb-3'>{formik.errors.user_password}</div>) : null}
-  </div>
-                
-   <div className='text-center'>
-  <button onClick={formik.handleSubmit} type="submit" style={{ marginRight: "20px" }} className='btn btn-lg btn-danger'>Login</button>
-  <Link  style={{margin:"5px",textDecoration:"none"}} to="/forgotpass">Forgot Password ?</Link>
-    <ToastContainer/>
- 
-               <hr />
-    <h4>New on MagicMatch.com</h4>
-  <button className='btn btn-lg btn-danger' ><Link style={{textDecoration:"none",color:'white'}} to="/signup">Register Free..</Link></button>
-  </div>
+      <Navbarg />
+      <div style={{ marginTop: "60px" }} className="backg">
+        <div className="responsive-width cardstyle">
+          <div className="card cardbg">
+            <div className="card-body card-mt">
+              <div className="text-center">
+                <i class="fa-solid  fa-user logo"></i>
+                <h4 style={{ fontFamily: "cursive", margin: "20px" }}>Login</h4>
+              </div>
+              <form>
+                <div class="mb-3 ">
+                  <label class="form-label">
+                    Your Email <span className="text-danger">*</span>
+                  </label>
+                  <input
+                    name="user_email"
+                    value={formik.values.user_email}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    type="email"
+                    class="form-control"
+                  />
+                  {formik.touched.user_email && formik.errors.user_email ? (
+                    <div className="text-danger mb-3">
+                      {formik.errors.user_email}
+                    </div>
+                  ) : null}
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">
+                    {" "}
+                    Password <span className="text-danger">*</span>
+                  </label>
+                  <input
+                    name="user_password"
+                    onBlur={formik.handleBlur}
+                    value={formik.values.user_password}
+                    onChange={formik.handleChange}
+                    type="password"
+                    class="form-control"
+                  />
+                  {formik.touched.user_password &&
+                  formik.errors.user_password ? (
+                    <div className="text-danger mb-3">
+                      {formik.errors.user_password}
+                    </div>
+                  ) : null}
+                </div>
 
-                      </form>
-                      
-                  </div>
-                  </div>
+                <div className="text-center">
+                  <button
+                    onClick={formik.handleSubmit}
+                    type="submit"
+                    style={{ marginRight: "20px" }}
+                    className="btn btn-lg btn-danger"
+                  >
+                    Login
+                  </button>
+                  <Link
+                    style={{ margin: "5px", textDecoration: "none" }}
+                    to="/forgotpass"
+                  >
+                    Forgot Password ?
+                  </Link>
+                  <ToastContainer />
+
+                  <hr />
+                  <h4>New on MagicMatch.com</h4>
+                  <button className="btn btn-lg btn-danger">
+                    <Link
+                      style={{ textDecoration: "none", color: "white" }}
+                      to="/signup"
+                    >
+                      Register Free..
+                    </Link>
+                  </button>
+                </div>
+              </form>
             </div>
-              
-         </div>
-      </>
-  )
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Login;

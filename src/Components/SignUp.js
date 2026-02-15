@@ -72,45 +72,104 @@ const Signup = () => {
   return (
     <>
       <Navbarg />
-  
-  <div className='backg'>
-  <div className=' responsive-width cardstyle' >
-  <div class="card cardbg">
-  <div class="card-body">
-  <form >
-    <h4 className='text-center heading1 text-danger'> <i class="fa-solid text-dark fa-circle-plus"></i> Register Yourself</h4>
-    <div  className="mb-3">
-    <label  className="form-label">Email address<span className='text-danger'>*</span></label>
-    <input type="email" name="user_email" onChange={formik.handleChange} onBlur={ formik.handleBlur} value={formik.values.user_email} className="form-control" />
-    {formik.touched.user_email && formik.errors.user_email ? (<div className='text-danger mb-3'>{formik.errors.user_email}</div>) : null}
-    </div>
-    <div className="mb-3">
-    <label  className="form-label">Contact Number<span className='text-danger'>*</span></label>
-    <input type="text" name="user_contact" onChange={formik.handleChange} onBlur={ formik.handleBlur} value={formik.values.user_contact} className="form-control" />
-     {formik.errors.user_contact && formik.touched.user_contact ? <div className='text-danger'>{formik.errors.user_contact}</div> : null}
-     </div>
-    <div className="mb-3">
-    <label  className="form-label">Password<span className='text-danger'>*</span></label>
-    <input type="password" name="user_pass" onChange={formik.handleChange} onBlur={ formik.handleBlur} value={formik.values.user_pass} className="form-control" />
-    {formik.errors.user_pass && formik.touched.user_pass ? <div className='text-danger' >{formik.errors.user_pass}</div> : null}
-    </div>
-    <div className="mb-3">
-    <label  className="form-label">Confirm Password<span className='text-danger'>*</span></label>
-    <input type="password" name="user_cpass" onChange={formik.handleChange} onBlur={ formik.handleBlur} value={formik.values.user_cpass} className="form-control" />
-    {formik.errors.user_cpass && formik.touched.user_cpass ? <div className='text-danger' >{formik.errors.user_cpass}</div> : null}
-    </div>
-    <div className='text-center' >
-                  <button type="submit" onClick={formik.handleSubmit} className="btn btn-primary">Submit and Continue</button>
+
+      <div style={{ marginTop: "60px" }} className="backg">
+        <div className=" responsive-width cardstyle">
+          <div class="card cardbg">
+            <div class="card-body">
+              <form>
+                <h4 className="text-center heading1 text-danger">
+                  {" "}
+                  <i class="fa-solid text-dark fa-circle-plus"></i> Register
+                  Yourself
+                </h4>
+                <div className="mb-3">
+                  <label className="form-label">
+                    Email address<span className="text-danger">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="user_email"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.user_email}
+                    className="form-control"
+                  />
+                  {formik.touched.user_email && formik.errors.user_email ? (
+                    <div className="text-danger mb-3">
+                      {formik.errors.user_email}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">
+                    Contact Number<span className="text-danger">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="user_contact"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.user_contact}
+                    className="form-control"
+                  />
+                  {formik.errors.user_contact && formik.touched.user_contact ? (
+                    <div className="text-danger">
+                      {formik.errors.user_contact}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">
+                    Password<span className="text-danger">*</span>
+                  </label>
+                  <input
+                    type="password"
+                    name="user_pass"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.user_pass}
+                    className="form-control"
+                  />
+                  {formik.errors.user_pass && formik.touched.user_pass ? (
+                    <div className="text-danger">{formik.errors.user_pass}</div>
+                  ) : null}
+                </div>
+                <div className="mb-3">
+                  <label className="form-label">
+                    Confirm Password<span className="text-danger">*</span>
+                  </label>
+                  <input
+                    type="password"
+                    name="user_cpass"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.user_cpass}
+                    className="form-control"
+                  />
+                  {formik.errors.user_cpass && formik.touched.user_cpass ? (
+                    <div className="text-danger">
+                      {formik.errors.user_cpass}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    onClick={formik.handleSubmit}
+                    className="btn btn-primary"
+                  >
+                    Submit and Continue
+                  </button>
                   <ToastContainer />
-                  
-    </div>
-</form>
-  </div>
-</div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-         </div>
-      </>
-  )
+      </div>
+    </>
+  );
 }
 
 export default Signup;

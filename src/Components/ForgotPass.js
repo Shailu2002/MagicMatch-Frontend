@@ -74,39 +74,50 @@ const ForgotPass = () => {
         }
      }
   return (
-      <>
-          <Navbar/>
-          <div className='backg'>
-          <div className='responsive-width cardstyle'>
-          <div className='card cardbg'>
-          <div className="card-body   ">
-          <div className='text-center'>
-          <h4 className='heading1'>Forgot Password</h4> 
-          <hr/>
-          </div>
-          <div className='text-center'>
-          <p style={{ margin: "20px" }}>We will send you OTP to reset your Password</p>
-          </div>
-    <form ref={form} >
-    <div class="mb-3 ">
-    <label  class="form-label"> Enter Email address</label>
-    <input type="email" onChange={setdata} value={ getdata.user_email} name="user_email" class="form-control"  />
-    <input hidden name="message" value={genotp} />
-  </div>
-  <div className='text-center'>
- <button type="submit" style={{ marginRight: "20px" }} onClick={sendemail} className='btn btn-lg btn-danger'>Send Otp </button>
-      <ToastContainer/>                             
-     </div>
-    </form>
-                         
-</div>
-</div>
+    <>
+      <div style={{ marginTop: "60px" }} className="backg">
+        <div className="responsive-width cardstyle">
+          <div className="card cardbg">
+            <div className="card-body   ">
+              <div className="text-center">
+                <h4 className="heading1">Forgot Password</h4>
+                <hr />
               </div>
-              
-</div>
-          
-      </>
-  )
+              <div className="text-center">
+                <p style={{ margin: "20px" }}>
+                  We will send you OTP to reset your Password
+                </p>
+              </div>
+              <form ref={form}>
+                <div class="mb-3 ">
+                  <label class="form-label"> Enter Email address</label>
+                  <input
+                    type="email"
+                    onChange={setdata}
+                    value={getdata.user_email}
+                    name="user_email"
+                    class="form-control"
+                  />
+                  <input hidden name="message" value={genotp} />
+                </div>
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    style={{ marginRight: "20px" }}
+                    onClick={sendemail}
+                    className="btn btn-lg btn-danger"
+                  >
+                    Send Otp{" "}
+                  </button>
+                  <ToastContainer />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default ForgotPass;
