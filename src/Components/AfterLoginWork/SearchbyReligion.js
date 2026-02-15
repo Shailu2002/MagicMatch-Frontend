@@ -1,9 +1,10 @@
-import React from 'react'
 import SCard from './SearchCard';
 import LoginNav from './LoginNav';
-import { useState ,useEffect} from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 const SearchbyReligion = () => {
-  const [Religion,setReligion]=useState()
+  const [Religion, setReligion] = useState()
+  const navigate = useNavigate();
   const [getsearchdata, setsearchdata] = useState([])
   const [gender, setgender] = useState();
   const getdata = async () => {
@@ -14,9 +15,15 @@ const SearchbyReligion = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
-
+     if (res.status === 401) {
+       console.log("Authentication failed: No token or invalid token");
+       localStorage.clear(); // Safety ke liye storage saaf karein
+       navigate("/login", { replace: true }); // Login par redirect
+       return; // Function ko yahan stop karein
+     }
     const data = await res.json();
     console.log(data);
     if (!data || data.status === 404) {

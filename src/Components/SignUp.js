@@ -32,7 +32,7 @@ const Signup = () => {
     initialValues: defaultValues,
   validationSchema:validationSchema,
     onSubmit: async (values) => {
-      const { user_id, user_date, user_email, user_contact, user_pass, user_cpass,activeStatus } = values;
+      const { user_id, user_date, user_email, user_contact, user_pass,activeStatus } = values;
       const sign = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/user_signup1`,
         {
@@ -46,7 +46,6 @@ const Signup = () => {
             user_email,
             user_contact,
             user_pass,
-            user_cpass,
             activeStatus,
           }),
         }

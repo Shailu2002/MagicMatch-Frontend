@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './LoginNav';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { toast, ToastContainer } from 'react-toastify';
 const EditPersonal = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const uid = location.state.gent;
   console.log(uid);
   const marital = [
@@ -32,9 +33,15 @@ const EditPersonal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
-
+     if (res2.status === 401) {
+       console.log("Authentication failed: No token or invalid token");
+       localStorage.clear(); // Safety ke liye storage saaf karein
+       navigate("/login", { replace: true }); // Login par redirect
+       return; // Function ko yahan stop karein
+     }
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -54,8 +61,15 @@ const EditPersonal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res2.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -74,8 +88,15 @@ const EditPersonal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res2.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -94,8 +115,15 @@ const EditPersonal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res3.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const data3=await res3.json();
     console.log(data3);
     if(!data3 || res3.status === 404){
@@ -113,9 +141,15 @@ const EditPersonal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
-
+  if (res2.status === 401) {
+    console.log("Authentication failed: No token or invalid token");
+    localStorage.clear(); // Safety ke liye storage saaf karein
+    navigate("/login", { replace: true }); // Login par redirect
+    return; // Function ko yahan stop karein
+  }
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -133,8 +167,15 @@ const EditPersonal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res3.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const data3=await res3.json();
     console.log(data3);
     if(!data3 || res3.status === 404){
@@ -192,6 +233,7 @@ const EditPersonal = () => {
               headers: {
                 "content-Type": "application/json",
               },
+              credentials:"include",
               body: JSON.stringify({
                 user_age,
                 user_religion,
@@ -205,7 +247,12 @@ const EditPersonal = () => {
               }),
             }
           );
-
+         if (res2.status === 401) {
+           console.log("Authentication failed: No token or invalid token");
+           localStorage.clear(); // Safety ke liye storage saaf karein
+           navigate("/login", { replace: true }); // Login par redirect
+           return; // Function ko yahan stop karein
+         }
         const data2 = res2.json();
         console.log("upadte personal",data2);
 
@@ -231,8 +278,15 @@ const EditPersonal = () => {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const datas = await res.json();
     console.log(datas);
     if (!datas|| res.status === 404) {

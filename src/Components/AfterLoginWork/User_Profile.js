@@ -37,8 +37,15 @@ const User_Profile = () => {
           headers: {
             "content-type": "application/json",
           },
-        }
+          credentials: "include",
+        },
       );
+      if (res.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        history("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
       const data = await res.json();
     
         if (!data || res.status === 404)

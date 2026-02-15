@@ -1,9 +1,10 @@
-import React from 'react';
 import SCard from './SearchCard';
 import { useState, useEffect } from 'react';
 import LoginNav from './LoginNav';
+import { useNavigate } from 'react-router-dom';
 const Searchbymother = () => {
   const [Mtongue, setMtongue] = useState();
+  const navigate = useNavigate();
   const [getsearchdata, setsearchdata] = useState([]);
   const [gender, setgender] = useState();
   const getdata = async () => {
@@ -17,6 +18,12 @@ const Searchbymother = () => {
         credentials: "include",
       },
     );
+     if (res.status === 401) {
+       console.log("Authentication failed: No token or invalid token");
+       localStorage.clear(); // Safety ke liye storage saaf karein
+       navigate("/login", { replace: true }); // Login par redirect
+       return; // Function ko yahan stop karein
+     }
     const data = await res.json();
     console.log(data);
     if (!data || data.status === 404) {

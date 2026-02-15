@@ -34,8 +34,15 @@ const SearchCard = ({ user }) => {
         headers: {
           "content-type": "application/json",
         },
-      }
-    );
+        credentials: "include",
+      },
+        );
+        if (res.status === 401) {
+          console.log("Authentication failed: No token or invalid token");
+          localStorage.clear(); // Safety ke liye storage saaf karein
+          history("/login", { replace: true }); // Login par redirect
+          return; // Function ko yahan stop karein
+        }
       const data = await res.json();
         if (!data || res.status === 404)
         {
@@ -152,6 +159,8 @@ const SearchCard = ({ user }) => {
                                                                     "Content-Type":
                                                                       "application/json",
                                                                   },
+                                                                  credentials:
+                                                                    "include",
                                                                   body: JSON.stringify(
                                                                     {
                                                                       user_id,
@@ -161,11 +170,23 @@ const SearchCard = ({ user }) => {
                                                                       sent_invitation_status,
                                                                       message_reply,
                                                                       reply_date,
-                                                                    }
+                                                                    },
                                                                   ),
-                                                                }
+                                                                },
                                                               );
-        
+                                                             if (sign.status ===401) {
+                                                               console.log(
+                                                                 "Authentication failed: No token or invalid token",
+                                                               );
+                                                               localStorage.clear(); // Safety ke liye storage saaf karein
+                                                               history(
+                                                                 "/login",
+                                                                 {
+                                                                   replace: true,
+                                                                 },
+                                                               ); // Login par redirect
+                                                               return; // Function ko yahan stop karein
+                                                             }
                                                             const resp = await sign.json();
                                                             console.log(resp);
                                                             if (sign.status === 404 || !resp) {

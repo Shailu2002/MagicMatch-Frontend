@@ -1,35 +1,47 @@
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const Logout = () => {
-  const history =  useNavigate();
-  useEffect(async() =>
-  {
-    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
-      method: "GET",
-      headers: {
-        "content-Type": "application/json",
-      },
-    });
-    console.log("aftera api")
-    const data = await res.json();
-    console.log(data);
-    if (res.status==200)
-    {
-      history("/login", {replace:true});
-    }
-    else
-    {
-      alert("wrong");
-    }
-     localStorage.clear();
-},[]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const logoutUser = async () => {
+      try {
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // YE SABSE ZAROORI HAI: Cookies bhejne ke liye
+          credentials: "include",
+        });
+
+        // Agar logout success hai (200) ya token expire hai (401)
+        // Dono cases mein humein user ko login pe hi bhejna hai
+        if (res.status === 200 || res.status === 401) {
+          localStorage.clear(); // Local storage clean karo
+          console.log("Logged out successfully");
+          // Redirect to login
+          navigate("/login", { replace: true });
+        } else {
+          // Koi aur error aaye toh
+          const data = await res.json();
+          console.log("Logout failed", data);
+          navigate("/login");
+        }
+      } catch (err) {
+        console.log("Logout Network Error:", err);
+        navigate("/login"); // Kuch bhi galat ho, login pe bhej do
+      }
+    };
+
+    logoutUser();
+  }, [navigate]);
+
   return (
-      <>
-          <p className='heading1'> you have been logged out</p>
-          <Link to="/login" >Login again</Link>
-      </>
-  )
-}
+    <div style={{ textAlign: "center", marginTop: "100px" }}>
+      <h1>Logging you out...</h1>
+      <p>Please wait a moment.</p>
+    </div>
+  );
+};
 
 export default Logout;

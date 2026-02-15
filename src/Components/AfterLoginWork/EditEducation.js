@@ -1,11 +1,12 @@
-import React, {useEffect} from 'react'
-import {useLocation } from 'react-router-dom';
+import  {useEffect} from 'react'
+import {useLocation,useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import Navbar from './LoginNav';
 import * as yup from 'yup';
 import { toast, ToastContainer } from 'react-toastify';
 const EditEducation = () => {
   const location = new useLocation();
+  const navigate = useNavigate();
   const uid = location.state.gent;
   console.log(uid);
   const defaultValues = {
@@ -39,6 +40,7 @@ validationSchema:validationSchema,
         headers: {
           "content-type": "application/json",
         },
+        credentials:"include",
         body: JSON.stringify({
           user_highest_qualification,
           user_working_with,
@@ -48,9 +50,14 @@ validationSchema:validationSchema,
         }),
       }
     );
- 
+  if (res.status === 401) {
+    console.log("Authentication failed: No token or invalid token");
+    localStorage.clear(); // Safety ke liye storage saaf karein
+    navigate("/login", { replace: true }); // Login par redirect
+    return; // Function ko yahan stop karein
+  }
     const data = res.json();
-    if(!data||res.status===404)
+   if(!data||res.status===404)
     {
       toast.error("something went wrong");
     }
@@ -70,8 +77,15 @@ validationSchema:validationSchema,
         headers: {
           "Content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const datas = await res.json();
     console.log(datas);
     if (!datas|| res.status === 404) {

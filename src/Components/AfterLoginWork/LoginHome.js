@@ -29,7 +29,7 @@ const LoginHome = () => {
       formData.append("user_photo", newUser.user_photo);
       formData.append("user_id", newUser.user_id);
       axios
-        .put("/photo_router/add/", formData)
+        .put("/photo_router/add/", formData, {withCredentials:true})
         .then((res) => {
           toast.success("Photo Updated successfully");
           getdata();
@@ -55,10 +55,18 @@ const LoginHome = () => {
         {
           method: "GET",
           headers: { "content-type": "application/json" },
+          credentials:"include",
         },
       );
-      const data = await res.json();
 
+      if (res.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        history("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
+      const data = await res.json();
+   
       if (!data || res.status === 404 || data.length === 0) {
         toast.error("Something Went Wrong or No Data Found");
       } else if (res.status === 200) {
@@ -82,7 +90,6 @@ const LoginHome = () => {
       }
     } catch (error) {
       console.error("Fetch error:", error);
-      // toast.error("Server Error");
     }
   };
 

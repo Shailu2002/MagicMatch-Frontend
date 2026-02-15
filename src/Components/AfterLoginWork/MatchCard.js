@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { toast, ToastContainer } from "react-toastify";
@@ -10,7 +10,7 @@ const MatchCard = ({ users, iduser }) => {
   const [pagecount, setpagecount] = useState(0);
   const counter = localStorage.getItem("ecount");
   console.log(users);
-  const history =  useNavigate();
+  const history=  useNavigate();
   const form = useRef();
   const [getuserdata, setuserdata] = useState({
     user_id: localStorage.getItem("luser_id"),
@@ -34,6 +34,12 @@ const MatchCard = ({ users, iduser }) => {
         },
       }
     );
+      if (res.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        history("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const data = await res.json();
     if (!data || res.status === 404) {
       toast.error("Something Went Wrong");
@@ -290,7 +296,12 @@ const MatchCard = ({ users, iduser }) => {
                                     }),
                                   },
                                 );
-
+     if (sign.status === 401) {
+       console.log("Authentication failed: No token or invalid token");
+       localStorage.clear(); // Safety ke liye storage saaf karein
+       history("/login", { replace: true }); // Login par redirect
+       return; // Function ko yahan stop karein
+     }
                                 const resp = await sign.json();
                                 console.log(resp);
                                 if (sign.status === 404 || !resp) {

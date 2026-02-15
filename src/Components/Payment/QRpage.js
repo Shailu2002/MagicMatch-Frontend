@@ -5,7 +5,8 @@ import { useNavigate , useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';//to handle form
 import { ToastContainer, toast } from 'react-toastify';
 const QRpage = () => {
-    const location = new useLocation();
+  const location = new useLocation();
+  const navigate = useNavigate();
     const plan_name = location.state.plan_name;
     const duration = location.state.duration;
     const amount =parseInt( location.state.amount);
@@ -29,10 +30,8 @@ const QRpage = () => {
       });
       const formik = useFormik({
         initialValues: defaultValues,
-      
       validationSchema:validationSchema,
         onSubmit:async(values)  => {
-          
           const { user_id,  transaction_id,total_amount,plan_name,plan_duration,approval_status,active_status,payment_date,amount_received,user_email_id } = values;
           const pay = await fetch(
             `${process.env.REACT_APP_BACKEND_URL}/user_payment1`,
@@ -41,6 +40,7 @@ const QRpage = () => {
               headers: {
                 "Content-Type": "application/json",
               },
+              credentials:"include",
               body: JSON.stringify({
                 user_id,
                 transaction_id,
@@ -55,6 +55,12 @@ const QRpage = () => {
               }),
             }
           ); 
+          if (pay.status === 401) {
+            console.log("Authentication failed: No token or invalid token");
+            localStorage.clear(); // Safety ke liye storage saaf karein
+            navigate("/login", { replace: true }); // Login par redirect
+            return; // Function ko yahan stop karein
+          }
           const resp = await pay.json();
           if (pay.status === 404 || !resp) {
             toast.error("Something went wrong!");

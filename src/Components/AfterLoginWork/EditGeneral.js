@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from 'react'
-import {useLocation } from 'react-router-dom';
+import { useState,useEffect } from 'react'
+import {useLocation ,useNavigate} from 'react-router-dom';
 import { useFormik } from 'formik';
 import Navbar from './LoginNav';
 import Cheight from '../SignUpdetails/Height.json';
@@ -8,6 +8,7 @@ import { toast, ToastContainer } from 'react-toastify';
 const EditGeneral = () => {
   const location = new useLocation();
   const uid = location.state.gent;
+  const navigate = useNavigate();
   console.log(uid);
   const defaultValues = {
     user_id:uid,
@@ -79,6 +80,7 @@ const EditGeneral = () => {
               headers: {
                 "content-type": "application/json",
               },
+              credentials: "include",
               body: JSON.stringify({
                 user_height,
                 user_blood_group,
@@ -87,10 +89,15 @@ const EditGeneral = () => {
                 user_diet,
                 user_hobbies,
               }),
-            }
+            },
           );
     
-       
+          if (res.status === 401) {
+            console.log("Authentication failed: No token or invalid token");
+            localStorage.clear(); // Safety ke liye storage saaf karein
+            navigate("/login", { replace: true }); // Login par redirect
+            return; // Function ko yahan stop karein
+          }
           const res = upsign.json();
           if(!res||upsign.status===404)
           {
@@ -116,9 +123,15 @@ const EditGeneral = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials:"include"
       }
     );
-    
+      if (res.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const datas = await res.json();
  
     console.log(datas);

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
+import { useNavigate } from 'react-router-dom';
 import Select from '@mui/material/Select';
 import Cheight from '../SignUpdetails/Height.json';
 import Checkbox from '@mui/material/Checkbox';
@@ -12,6 +13,7 @@ import * as yup from 'yup';
 import { toast, ToastContainer } from 'react-toastify';
 const EditPartner = () => {
   const location = new useLocation();
+  const navigate = useNavigate();
   const uid = location.state.gent;
   console.log(uid);
   const ITEM_HEIGHT = 40;
@@ -33,8 +35,15 @@ const EditPartner = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res2.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -62,8 +71,15 @@ const [partner_city,setcity]=useState([]);
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res2.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -85,8 +101,15 @@ const [partner_city,setcity]=useState([]);
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res2.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -115,8 +138,15 @@ const [partner_city,setcity]=useState([]);
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res3.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const data3=await res3.json();
     console.log(data3);
     if(!data3 || res3.status === 404){
@@ -147,8 +177,15 @@ const [partner_city,setcity]=useState([]);
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res2.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const data2=await res2.json();
     console.log(data2);
     if(!data2 || res2.status === 404){
@@ -171,8 +208,15 @@ const [partner_city,setcity]=useState([]);
         headers: {
           "Content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
+      if (res.status === 401) {
+        console.log("Authentication failed: No token or invalid token");
+        localStorage.clear(); // Safety ke liye storage saaf karein
+        navigate("/login", { replace: true }); // Login par redirect
+        return; // Function ko yahan stop karein
+      }
     const datas = await res.json();
     console.log(datas);
     if (!datas || res.status === 404) {
@@ -302,6 +346,7 @@ const [partner_city,setcity]=useState([]);
               headers: {
                 "content-Type": "application/json",
               },
+              credentials: "include",
               body: JSON.stringify({
                 partner_min_age,
                 partner_max_age,
@@ -318,9 +363,15 @@ const [partner_city,setcity]=useState([]);
                 partner_state,
                 partner_city,
               }),
-            }
+            },
           );
   
+            if (res2.status === 401) {
+              console.log("Authentication failed: No token or invalid token");
+              localStorage.clear(); // Safety ke liye storage saaf karein
+              navigate("/login", { replace: true }); // Login par redirect
+              return; // Function ko yahan stop karein
+            }
           const data2 = res2.json();
           
           if (res2.status === 200)

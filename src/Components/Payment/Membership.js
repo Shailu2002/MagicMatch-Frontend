@@ -1,5 +1,5 @@
    
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoginNav from '../AfterLoginWork/LoginNav';
 import { useNavigate } from 'react-router-dom';
 const Membership = () => {
@@ -14,9 +14,15 @@ const Membership = () => {
             headers: {
               "content-type": "application/json",
             },
+            credentials:"include",
           }
         );
-
+        if (res.status === 401) {
+          console.log("Authentication failed: No token or invalid token");
+          localStorage.clear(); // Safety ke liye storage saaf karein
+          history("/login", { replace: true }); // Login par redirect
+          return; // Function ko yahan stop karein
+        }
         const data = await res.json();
         console.log(data.length);
         setplan(data);
