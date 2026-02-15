@@ -9,7 +9,7 @@ import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import CachedTwoToneIcon from '@mui/icons-material/CachedTwoTone';
 import Charts from './Charts';
 export const Dash = () => {
-const [getdash,setdash]=useState([])
+  const [getdash, setdash] = useState({})
  const getdata1=async()=>{
          const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/dash`, {
            method: "GET",
@@ -204,7 +204,7 @@ setPageCount1(pagedataCount1)
     </div>
     <div class="col-md-8 ">
       <div class="card-body mt-0">
-      <h4 class="card-text dash" ><small >{getdash.S?.[0].total_amount}</small></h4>
+      <h4 class="card-text dash" ><small >{getdash.S?.[0]?.total_amount}</small></h4>
         <h5 class="card-title dash1">TOTAL SALES</h5>
       </div>
     </div>

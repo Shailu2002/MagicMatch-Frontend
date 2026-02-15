@@ -8,13 +8,14 @@ const Searchbymother = () => {
   const [gender, setgender] = useState();
   const getdata = async () => {
     const res = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/searchMton//${Mtongue}/${gender}`,
+      `${process.env.REACT_APP_BACKEND_URL}/searchMton/${Mtongue}/${gender}`,
       {
         method: "GET",
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
     const data = await res.json();
     console.log(data);

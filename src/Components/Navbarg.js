@@ -29,7 +29,7 @@ const Navbarg = () => {
            < Link to="/signup"  className='nav-link nav-text text-white'><i class="fa-solid text-black fa-user-plus "></i></Link>
            </li>  
           <li className='nav-item active'>
-          <Link to="/login" target="_blank" className='nav-link nav-text text-white'> <i class="fa-solid  text-black fa-right-to-bracket"></i></Link>
+          <Link to="/login"  className='nav-link nav-text text-white'> <i class="fa-solid  text-black fa-right-to-bracket"></i></Link>
                               </li>
                               </ul>
                            

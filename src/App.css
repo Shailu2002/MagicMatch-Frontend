@@ -28,7 +28,7 @@
 }
 
 .feedback {
-    background-image: url("https://th.bing.com/th/id/OIP.ibP7ov37fN-Tu-FnyydY_AHaFR?pid=ImgDet&w=1024&h=730&rs=1");
+    background-image: url('./Components/Images/first-meet-during-dating.jpg');
     background-size: 100% 100%;
     background-attachment: fixed;
     width: 100%;

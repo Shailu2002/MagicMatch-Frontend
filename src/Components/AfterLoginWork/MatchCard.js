@@ -10,7 +10,7 @@ const MatchCard = ({ users, iduser }) => {
   const [pagecount, setpagecount] = useState(0);
   const counter = localStorage.getItem("ecount");
   console.log(users);
-  const history = new useNavigate();
+  const history =  useNavigate();
   const form = useRef();
   const [getuserdata, setuserdata] = useState({
     user_id: localStorage.getItem("luser_id"),
@@ -28,6 +28,7 @@ const MatchCard = ({ users, iduser }) => {
       `${process.env.REACT_APP_BACKEND_URL}/getalldetails_data/${uind}`,
       {
         method: "GET",
+        credentials:"include",
         headers: {
           "content-type": "application/json",
         },
@@ -104,6 +105,20 @@ const MatchCard = ({ users, iduser }) => {
   }, [users, page]);
   return (
     <>
+      <form ref={form} style={{display:"none"}}>
+        <input
+          type="email"
+          defaultValue={localStorage.getItem("user_email")}
+          name="user_email"
+        />
+        <input
+          type="text"
+          defaultValue={localStorage.getItem("name")}
+          name="user_name"
+        />
+        <input  type="text" name="send_name" />
+        <input   type="text" name="message"/>
+      </form>
       {users.length === 0 ? (
         <div className=" text-center text-white heading1">No Matches </div>
       ) : users.length === 1 ? (
@@ -122,7 +137,11 @@ const MatchCard = ({ users, iduser }) => {
       {pagedata.map((element, id) => {
         return (
           <>
-            <div style={{ paddingTop: "2%" }} className="container">
+            <div
+              key={element.user_id || id}
+              style={{ paddingTop: "2%" }}
+              className="container"
+            >
               <div
                 style={{
                   width: "70%",
@@ -256,6 +275,7 @@ const MatchCard = ({ users, iduser }) => {
                                   `${process.env.REACT_APP_BACKEND_URL}/interest_sent`,
                                   {
                                     method: "POST",
+                                    credentials: "include",
                                     headers: {
                                       "Content-Type": "application/json",
                                     },
@@ -268,7 +288,7 @@ const MatchCard = ({ users, iduser }) => {
                                       message_reply,
                                       reply_date,
                                     }),
-                                  }
+                                  },
                                 );
 
                                 const resp = await sign.json();
@@ -287,7 +307,7 @@ const MatchCard = ({ users, iduser }) => {
                                     ")";
                                   toast.success(
                                     "Invitation has been sent to " +
-                                      element.user_name
+                                      element.user_name,
                                   );
                                   // invitation mail
                                   emailjs
@@ -295,7 +315,7 @@ const MatchCard = ({ users, iduser }) => {
                                       "service_a6qdosh",
                                       "template_qf787ti",
                                       form.current,
-                                      "BhPUrRnVL-hQNOxI2"
+                                      "BhPUrRnVL-hQNOxI2",
                                     )
                                     .then(
                                       (result) => {
@@ -303,11 +323,11 @@ const MatchCard = ({ users, iduser }) => {
                                       },
                                       (error) => {
                                         console.log(error.text);
-                                      }
+                                      },
                                     );
                                 } else if (sign.status === 203) {
                                   toast.error(
-                                    "You have already sent this Connect Request .Kindly Check your Inbox"
+                                    "You have already sent this Connect Request .Kindly Check your Inbox",
                                   );
                                 }
                               }}
@@ -325,22 +345,6 @@ const MatchCard = ({ users, iduser }) => {
                           </div>
                         )}
                       </div>
-                      <form ref={form}>
-                        <input
-                          hidden
-                          type="email"
-                          value={localStorage.getItem("user_email")}
-                          name="user_email"
-                        />
-                        <input
-                          hidden
-                          type="text"
-                          value={localStorage.getItem("name")}
-                          name="user_name"
-                        />
-                        <input hidden type="text" name="send_name" value="" />
-                        <input hidden type="text" name="message" value="" />
-                      </form>
                     </div>
                     <ToastContainer />
                   </div>

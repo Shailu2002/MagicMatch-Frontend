@@ -30,6 +30,7 @@ const Login = () => {
             headers: {
               "Content-Type": "application/json",
             },
+            credentials:"include",
             body: JSON.stringify({
               user_email,
               user_password,
@@ -66,12 +67,16 @@ const Login = () => {
     }//onsubmit end here
   });
 
-  const genipwork = async () =>
-  {
-    const res = await axios.get('https://geolocation-db.com/json/')
-        console.log(res.data);
-        setIP(res.data.IPv4)
-    }
+const genipwork = async () => {
+  try {
+    const res = await axios.get("https://api.ipify.org?format=json");
+    console.log("IP Address fetched:", res.data.ip);
+    setIP(res.data.ip);
+  } catch (error) {
+    console.error("IP fetch fail ho gayi:", error);
+    setIP(""); // Fallback value
+  }
+};
   useEffect(() => {
     genipwork(); 
   },[]);
