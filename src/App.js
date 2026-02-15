@@ -71,33 +71,33 @@ import Language from './Home/Attributes/Language';
 import './api';
 
 function App() {
-  const [isAuth, setIsAuth] = useState(null);
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        // Backend ka wo route jo token verify karta hai
-        const res = await axios.get(
-          `/authenticate_user`,
-          {
-            withCredentials: true,
-          },
-        );
+  // const [isAuth, setIsAuth] = useState(null);
+  // useEffect(() => {
+  //   const checkUser = async () => {
+  //     try {
+  //       // Backend ka wo route jo token verify karta hai
+  //       const res = await axios.get(
+  //         `/authenticate_user`,
+  //         {
+  //           withCredentials: true,
+  //         },
+  //       );
 
-        if (res.status === 200) {
-          setIsAuth(true); // Token sahi hai
-        } else {
-          setIsAuth(false); // Token galat hai ya nahi hai
-        }
-      } catch (err) {
-        setIsAuth(false);
-      }
-    };
-    checkUser();
-  }, []);
-  // Jab tak backend se response na aaye, ek loader dikhao
-  if (isAuth === null) {
-    return <div className="text-center mt-5">Loading MagicMatch...</div>;
-  }
+  //       if (res.status === 200) {
+  //         setIsAuth(true); // Token sahi hai
+  //       } else {
+  //         setIsAuth(false); // Token galat hai ya nahi hai
+  //       }
+  //     } catch (err) {
+  //       setIsAuth(false);
+  //     }
+  //   };
+  //   checkUser();
+  // }, []);
+  // // Jab tak backend se response na aaye, ek loader dikhao
+  // if (isAuth === null) {
+  //   return <div className="text-center mt-5">Loading MagicMatch...</div>;
+  // }
   return (
     <>
       {/* <Matchemail/> */}
@@ -119,7 +119,11 @@ function App() {
           <Route path="/success_story" element={<Success />} />
           <Route path="/education" element={<Education />} />
           <Route path="/editpersonal" element={<Editp />} />
-          <Route path="/" element={isAuth ? <Navigate to="/loginhome" /> : <Home />} />
+          {/* <Route path="/" element={isAuth ? <Navigate to="/loginhome" /> : <Home />} /> */}
+          <Route
+            path="/"
+            element={<Home />}
+          />
           <Route path="/searchid" element={<SearchbyId />} />
           <Route path="/searchage" element={<SearchbyAge />} />
           <Route path="/searchreligion" element={<SearchbyReligion />} />
