@@ -10,7 +10,7 @@ import Photo from './Components/SignUpdetails/Photo';
 import SearchbyAge from './Components/AfterLoginWork/SearchbyAge';
 import SearchbyId from './Components/AfterLoginWork/SearchbyId';
 import SearchbyReligion from './Components/AfterLoginWork/SearchbyReligion';
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate} from 'react-router-dom';
 import Searchbymother from './Components/AfterLoginWork/Searchbymother';
@@ -37,13 +37,11 @@ import Profile from './Components/AfterLoginWork/Profile';
 import ReceivedInvitation from './Components/AfterLoginWork/Inbox/ReceivedInvitation';
 //admin side 
 import Dash from './Home/Dash';
-import Nav from './Home/Nav';
 import Amember from './Home/Amember';
 import Nmember from './Home/Nmember';
 import Pmember from './Home/Pmember';
 import MemPlan from './Home/MemPlan';
 import './Home/mystyle.css';
-import Register from './Home/Register'
 import { Feed } from './Home/Feed';
 import  Successadmin  from './Home/Success';
 import Loginadmin from './Home/Login';
@@ -71,33 +69,33 @@ import Language from './Home/Attributes/Language';
 import './api';
 
 function App() {
-  // const [isAuth, setIsAuth] = useState(null);
-  // useEffect(() => {
-  //   const checkUser = async () => {
-  //     try {
-  //       // Backend ka wo route jo token verify karta hai
-  //       const res = await axios.get(
-  //         `/authenticate_user`,
-  //         {
-  //           withCredentials: true,
-  //         },
-  //       );
+  const [isAuth, setIsAuth] = useState(null);
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        // Backend ka wo route jo token verify karta hai
+        const res = await axios.get(
+          `/authenticate_user`,
+          {
+            withCredentials: true,
+          },
+        );
 
-  //       if (res.status === 200) {
-  //         setIsAuth(true); // Token sahi hai
-  //       } else {
-  //         setIsAuth(false); // Token galat hai ya nahi hai
-  //       }
-  //     } catch (err) {
-  //       setIsAuth(false);
-  //     }
-  //   };
-  //   checkUser();
-  // }, []);
-  // // Jab tak backend se response na aaye, ek loader dikhao
-  // if (isAuth === null) {
-  //   return <div className="text-center mt-5">Loading MagicMatch...</div>;
-  // }
+        if (res.status === 200) {
+          setIsAuth(true); // Token sahi hai
+        } else {
+          setIsAuth(false); // Token galat hai ya nahi hai
+        }
+      } catch (err) {
+        setIsAuth(false);
+      }
+    };
+    checkUser();
+  }, []);
+  // Jab tak backend se response na aaye, ek loader dikhao
+  if (isAuth === null) {
+    return <div className="text-center mt-5">Loading MagicMatch...</div>;
+  }
   return (
     <>
       {/* <Matchemail/> */}
@@ -119,11 +117,7 @@ function App() {
           <Route path="/success_story" element={<Success />} />
           <Route path="/education" element={<Education />} />
           <Route path="/editpersonal" element={<Editp />} />
-          {/* <Route path="/" element={isAuth ? <Navigate to="/loginhome" /> : <Home />} /> */}
-          <Route
-            path="/"
-            element={<Home />}
-          />
+          <Route path="/" element={isAuth ? <Navigate to="/loginhome" /> : <Home />} />
           <Route path="/searchid" element={<SearchbyId />} />
           <Route path="/searchage" element={<SearchbyAge />} />
           <Route path="/searchreligion" element={<SearchbyReligion />} />
