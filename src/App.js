@@ -212,7 +212,7 @@ function App() {
           />
           <Route
             path="/"
-            element={isAuth ? <Navigate to="/loginhome" /> : <Home />}
+            element={<Home />}
           />
           <Route
             path="/searchid"
