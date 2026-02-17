@@ -29,15 +29,16 @@ const Login = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "Accept": "application/json",
             },
-            credentials:"include",
+            credentials: "include",
             body: JSON.stringify({
               user_email,
               user_password,
               ip_address,
               login_date,
             }),
-          }
+          },
         );
       const resp = await sign.json();
       console.log(resp.user_id);
@@ -69,7 +70,7 @@ const Login = () => {
 
 const genipwork = async () => {
   try {
-    const res = await axios.get("https://api.ipify.org?format=json");
+    const res = await axios.get("https://api.ipify.org?format=json", {withCredentials:true});
     console.log("IP Address fetched:", res.data.ip);
     setIP(res.data.ip);
   } catch (error) {
