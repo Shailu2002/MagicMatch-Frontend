@@ -1,17 +1,7 @@
 import { Link } from 'react-router-dom';
 import SuccessCard from './SuccessCard';
 import Navbarg from './Navbarg';
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 const HomePage = () => {
-const navigate = useNavigate();
-
-useEffect(() => {
-  const user = localStorage.getItem("luser_id");
-  if (user) {
-    navigate("/loginhome", { replace: true });
-  }
-}, []);
   return (
     <>
       <div className="bimg bgbody">

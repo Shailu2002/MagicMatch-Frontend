@@ -92,12 +92,6 @@ function App() {
     };
     checkUser();
   }, []);
-  const ProtectedRoute = ({ children }) => {
-    if (isAuth === false) {
-      return <Navigate to="/login" replace />;
-    }
-    return children;
-  };
   // Jab tak backend se response na aaye, ek loader dikhao
  if (isAuth === null) {
    return (
@@ -118,134 +112,29 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/inbox_received"
-            element={
-              <ProtectedRoute>
-                <ReceivedInvitation />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/inbox_sent"
-            element={
-              <ProtectedRoute>
-                <SentInvitation />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/inbox_received" element={<ReceivedInvitation />} />
+          <Route path="/inbox_sent" element={<SentInvitation />} />
           {/* <Route path="/viewkundali" element={ <ViewKundali/>}/> */}
-          <Route
-            path="/allprofile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/allprofile" element={<Profile />} />
           <Route path="/feed" element={<Feedback />} />
-          <Route
-            path="/qrpage"
-            element={
-              <ProtectedRoute>
-                <QRpage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/mymatches"
-            element={
-              <ProtectedRoute>
-                <MyMatches />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/editgeneral"
-            element={
-              <ProtectedRoute>
-                <EditGeneral />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/myprofile"
-            element={
-              <ProtectedRoute>
-                <User_Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/editpartner"
-            element={
-              <ProtectedRoute>
-                <EditPartner />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/editeducational"
-            element={
-              <ProtectedRoute>
-                <EditEducation />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/membership"
-            element={
-              <ProtectedRoute>
-                <Membership />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/qrpage" element={<QRpage />} />
+          <Route path="/mymatches" element={<MyMatches />} />
+          <Route path="/editgeneral" element={<EditGeneral />} />
+          <Route path="/myprofile" element={<User_Profile />} />
+          <Route path="/editpartner" element={<EditPartner />} />
+          <Route path="/editeducational" element={<EditEducation />} />
+          <Route path="/membership" element={<Membership />} />
           <Route path="/success_story" element={<Success />} />
           <Route path="/education" element={<Education />} />
-          <Route
-            path="/editpersonal"
-            element={
-              <ProtectedRoute>
-                <Editp />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/editpersonal" element={<Editp />} />
           <Route
             path="/"
-            element={<Home />}
+            element={isAuth ? <Navigate to="/loginhome" replace /> : <Home />}
           />
-          <Route
-            path="/searchid"
-            element={
-              <ProtectedRoute>
-                <SearchbyId />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/searchage"
-            element={
-              <ProtectedRoute>
-                <SearchbyAge />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/searchreligion"
-            element={
-              <ProtectedRoute>
-                <SearchbyReligion />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/searchmother"
-            element={
-              <ProtectedRoute>
-                <Searchbymother />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/searchid" element={<SearchbyId />} />
+          <Route path="/searchage" element={<SearchbyAge />} />
+          <Route path="/searchreligion" element={<SearchbyReligion />} />
+          <Route path="/searchmother" element={<Searchbymother />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/personal" element={<Personal />} />
@@ -256,14 +145,7 @@ function App() {
           <Route path="/forgotpass" element={<ForgotPass />} />
           <Route path="/sendotpuser" element={<Otp />} />
           <Route path="/resetpassuser" element={<Resetpass />} />
-          <Route
-            path="/loginhome"
-            element={
-              <ProtectedRoute>
-                <LoginHome />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/loginhome" element={<LoginHome />} />
 
           {/* admin side */}
 
