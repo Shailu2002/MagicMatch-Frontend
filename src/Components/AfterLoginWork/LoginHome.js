@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 const LoginHome = () => {
   const history = useNavigate();
   const uid = localStorage.getItem("luser_id");
-
+  const [isAuth, setIsAuth] = useState(null);
   // Initial States ko empty objects/arrays ke bajaye logically set kiya hai
   const [interest, setint] = useState([]);
   const [express, setexp] = useState([]);
@@ -19,7 +19,19 @@ const LoginHome = () => {
     user_id: uid,
     user_photo: "",
   });
-
+   if (isAuth === null) {
+     return (
+       <div
+         className="d-flex justify-content-center align-items-center"
+         style={{ height: "100vh" }}
+       >
+         <div className="text-center">
+           <div className="spinner-border text-danger" role="status"></div>
+           <h4 className="mt-3">Loading MagicMatch...</h4>
+         </div>
+       </div>
+     );
+   }
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!newUser.user_photo) {
@@ -62,8 +74,12 @@ const LoginHome = () => {
       if (res.status === 401) {
         console.log("Authentication failed: No token or invalid token");
         localStorage.clear(); // Safety ke liye storage saaf karein
+        setIsAuth(false);
         history("/login", { replace: true }); // Login par redirect
         return; // Function ko yahan stop karein
+      }
+      else {
+        setIsAuth(true);
       }
       const data = await res.json();
    
