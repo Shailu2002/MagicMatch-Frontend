@@ -62,7 +62,7 @@ const SuccessStory = () => {
                   formData.append('story_approval_status', story_approval_status);
             
         
-                axios.post('/success_router/add/', { withCredentials: true } ,formData)
+                axios.post('/success_router/add/',formData,{withCredentials:true})
                     .then(res => {
                         
                         console.log(res);

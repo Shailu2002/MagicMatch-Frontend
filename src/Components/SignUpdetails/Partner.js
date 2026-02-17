@@ -34,7 +34,8 @@ const Partner = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
     const data2=await res2.json();
     console.log(data2);
@@ -62,7 +63,9 @@ const [citylist, setcityList] = useState([]);
         headers: {
           "content-Type": "application/json",
         },
-      }
+
+        credentials: "include",
+      },
     );
     const data2=await res2.json();
     console.log(data2);
@@ -84,7 +87,8 @@ const [citylist, setcityList] = useState([]);
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
     const data2=await res2.json();
     console.log(data2);
@@ -114,7 +118,8 @@ const [citylist, setcityList] = useState([]);
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
     const data3=await res3.json();
     console.log(data3);
@@ -146,7 +151,8 @@ const [citylist, setcityList] = useState([]);
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
     const data2=await res2.json();
     console.log(data2);
@@ -259,6 +265,7 @@ const [citylist, setcityList] = useState([]);
                 headers: {
                   "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify({
                   user_id,
                   partner_gender,
@@ -277,7 +284,7 @@ const [citylist, setcityList] = useState([]);
                   partner_state,
                   partner_city,
                 }),
-              }
+              },
             );       
             const resp = await sign.json();
             if (sign.status === 404 || !resp) {

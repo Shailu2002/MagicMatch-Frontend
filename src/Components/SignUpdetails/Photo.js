@@ -28,8 +28,8 @@ const Photo = () => {
                 formData.append('user_photo', newUser.user_photo);
                 formData.append('user_id', newUser.user_id);
                 axios
-                  .post("/photo_router/add/", formData, {
-                    headers: { "Content-Type": "multipart/form-data" },
+                    .post("/photo_router/add/", formData, {
+                        headers: { "Content-Type": "multipart/form-data" },withCredentials:true
                   })
                   .then((res) => {
                     console.log(res);

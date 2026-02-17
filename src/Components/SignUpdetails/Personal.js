@@ -21,7 +21,9 @@ const Personal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+
+        credentials: "include",
+      },
     );
 
     const data2=await res2.json();
@@ -46,7 +48,8 @@ const Personal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
 
     const data2=await res2.json();
@@ -69,7 +72,9 @@ const Personal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+
+        credentials: "include",
+      },
     );
 
     const data2=await res2.json();
@@ -92,7 +97,9 @@ const Personal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+
+        credentials: "include",
+      },
     );
 
     const data3=await res3.json();
@@ -115,7 +122,8 @@ const Personal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
 
     const data2=await res2.json();
@@ -138,7 +146,8 @@ const Personal = () => {
         headers: {
           "content-Type": "application/json",
         },
-      }
+        credentials: "include",
+      },
     );
     const data3=await res3.json();
     console.log(data3);
@@ -217,6 +226,7 @@ const Personal = () => {
             headers: {
               "Content-Type": "application/json",
             },
+            credentials: "include",
             body: JSON.stringify({
               user_id,
               user_name,
@@ -234,7 +244,7 @@ const Personal = () => {
               user_state,
               user_city,
             }),
-          }
+          },
         );
                  
         const resp = await sign.json();

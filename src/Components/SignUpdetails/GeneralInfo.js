@@ -73,6 +73,7 @@ const GeneralInfo = () => {
             headers: {
               "Content-Type": "application/json",
             },
+            credentials: "include",
             body: JSON.stringify({
               user_id,
               user_height,
@@ -82,7 +83,7 @@ const GeneralInfo = () => {
               user_diet,
               user_hobbies,
             }),
-          }
+          },
         );
                  
         const resp = await sign.json();

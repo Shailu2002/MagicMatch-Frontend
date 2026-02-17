@@ -44,6 +44,7 @@ validationSchema:validationSchema,
         headers: {
           "Content-Type": "application/json",
         },
+        credentials:"include",
         body: JSON.stringify({
           user_id,
           user_highest_qualification,
