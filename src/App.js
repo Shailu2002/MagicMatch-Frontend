@@ -80,12 +80,12 @@ function App() {
             withCredentials: true,
           },
         );
-
+        const localToken = localStorage.getItem("token");
         if (res.status === 200) {
           setIsAuth(true); // Token sahi hai
         } else {
-          setIsAuth(false); // Token galat hai ya nahi hai
-        }
+        setIsAuth(localToken? true : false);
+      }
       } catch (err) {
         setIsAuth(false);
       }
@@ -129,7 +129,7 @@ function App() {
           <Route path="/editpersonal" element={<Editp />} />
           <Route
             path="/"
-            element={isAuth ? <Navigate to="/loginhome" replace /> : <Home />}
+            element={isAuth ? <Navigate to="/loginhome"/> : <Home />}
           />
           <Route path="/searchid" element={<SearchbyId />} />
           <Route path="/searchage" element={<SearchbyAge />} />
@@ -145,7 +145,12 @@ function App() {
           <Route path="/forgotpass" element={<ForgotPass />} />
           <Route path="/sendotpuser" element={<Otp />} />
           <Route path="/resetpassuser" element={<Resetpass />} />
-          <Route path="/loginhome" element={<LoginHome />} />
+          <Route
+            path="/loginhome"
+            element={
+                <LoginHome />
+            }
+          />
 
           {/* admin side */}
 
