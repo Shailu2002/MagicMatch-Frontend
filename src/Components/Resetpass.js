@@ -21,7 +21,7 @@ const Resetpass = () => {
     initialValues: defaultValues,
     validationSchema:validationSchema,
     onSubmit: async (values) => {
-      const { user_pass,user_cpass } = values;
+      const { user_pass } = values;
       const res2 = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/update_pass_user/${id}`,
         {
@@ -29,9 +29,9 @@ const Resetpass = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials:"include",
           body: JSON.stringify({
             user_pass,
-            user_cpass,
           }),
         }
       );
