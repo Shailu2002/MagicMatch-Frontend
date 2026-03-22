@@ -96,14 +96,14 @@ export const City = () => {
         console.log(countrycode)
         console.log(statecode)
         if (!name) {
-            toast.error("enter Country name");
+            toast.error("enter city name");
 
         }
         else if (!countrycode) {
-          toast.error("enter countrycode");
+          toast.error("enter country");
         }
         else if (!statecode) {
-           toast.error("enter statecode");
+           toast.error("select state");
         }
         else {
             const res = await fetch(
@@ -186,13 +186,13 @@ export const City = () => {
 
     const renderOption = (element, index) => {
         return (
-            <option key={index} >{element.name}</option>
+            <option key={index} value={element.isCode} >{element.name}</option>
         )
     }
 
     const renderState = (ele, id) => {
         return (
-            <option key={id} >{ele.name}</option>
+            <option key={id} value={ele.statecode} >{ele.name}</option>
         )
     }
 
@@ -245,10 +245,11 @@ export const City = () => {
                 {
                   pageData1.length > 0 ?
                     pageData1.map((element, id) => {
+                      const serialNumber = (page1 - 1) * 8 + id + 1;
                       return (
                         <>
                           <tr className='table-secondary'>
-                          <td> {id+1}</td>
+                          <td> {serialNumber}</td>
                             <td>{element.statecode}</td>
                             <td>{element.name}</td>
                          <td>   <button className='me-3 btn w3-red' data-tooltip-id="my-tooltip" data-tooltip-content="Delete city" onClick={()=>{deletecity(element._id);}} ><DeleteIcon/></button>

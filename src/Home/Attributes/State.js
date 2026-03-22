@@ -35,7 +35,7 @@ export const State = () => {
     
     
 
-    const [getState, setState] = useState({ name: "", countrycode: "" })
+    const [getState, setState] = useState({ name: "", countrycode: "",statecode:"" })
     const setdata = (e) => {
         const { name, value } = e.target;
         setState((primary) => {
@@ -49,34 +49,32 @@ export const State = () => {
 
     const addinpdata = async (e) => {
         e.preventDefault();
-        const { name, countrycode } = getState
+        const { name, countrycode,statecode } = getState
         if (!name) {
-            toast.error("enter Country name");
+          toast.error("enter state name");
+        } else if (!countrycode) {
+          toast.error("select country");
+        } else if (!statecode) {
+          toast.error("enter statecode");
+        } else {
+          const res = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/add_s`,
+            {
+              method: "POST",
+              headers: {
+                "content-Type": "application/json",
+              },
+              body: JSON.stringify({ name, countrycode,statecode }),
+            },
+          );
 
-        }
-        else if (!countrycode) {
-            toast.error("enter countrycode");
-        }
-        else {
-            const res = await fetch(
-              `${process.env.REACT_APP_BACKEND_URL}/add_s`,
-              {
-                method: "POST",
-                headers: {
-                  "content-Type": "application/json",
-                },
-                body: JSON.stringify({ name, countrycode }),
-              }
-            );
-
-            const data = await res.json();
-            console.log(data);
-            if (!data || res.status === 404) {
-                toast.error("error");
-            }
-            else {
-                toast.success("data is saved");
-            }
+          const data = await res.json();
+          console.log(data);
+          if (!data || res.status === 404) {
+            toast.error("error");
+          } else {
+            toast.success("data is saved");
+          }
         }
     }
 
@@ -137,7 +135,7 @@ export const State = () => {
 
     const renderOption = (element, index) => {
                      return (
-                         <option key={index} >{element.name}</option>
+                         <option key={index} value={element.isCode} >{element.name}</option>
                      )
     }
     
@@ -162,38 +160,77 @@ export const State = () => {
     }
   }
     return (
-
-        <>
-<div className='row'>
-    <div className='col'>        
-<div class="w3-card-4 mt-3 ms-5" style={{"width":"450px","height":"220px","borderRadius":"150px"}}>
-                <header class="w3-container w3-grey">
-                    <h3>ADD State</h3>
-                </header>
-                <form method="post">
+      <>
+        <div className="row">
+          <div className="col">
+            <div
+              class="w3-card-4 mt-3 ms-5"
+              style={{ width: "450px", height: "220px", borderRadius: "150px" }}
+            >
+              <header class="w3-container w3-grey">
+                <h3>ADD State</h3>
+              </header>
+              <form method="post">
                 <div class="w3-container w3-white">
-                
-                <div class="mb-3">
+                  <div class="mb-3">
                     <label class="form-label ms-2 mt-2">Country</label>
-                     <select type="text" class="form-control ms-2 mt-2" name="countrycode" value={getState.countrycode} onChange={setdata} placeholder="" style={{ "width": "100px" }}>
-                        <option selected>Select</option>
-                        { getc.map(renderOption)}</select>
-            </div>
-            <div class="mb-3">
-                <label class="form-label ms-2 mt-2">State</label>
-                <input type="text" class="form-control ms-2 mt-2" name="name" value={getState.name} onChange={setdata} placeholder="" style={{ "width": "100px" }} />
-            </div>
-                                         
+                    <select
+                      type="text"
+                      class="form-control ms-2 mt-2"
+                      name="countrycode"
+                      value={getState.countrycode}
+                      onChange={setdata}
+                      placeholder=""
+                      style={{ width: "100px" }}
+                    >
+                      <option selected>Select</option>
+                      {getc.map(renderOption)}
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label ms-2 mt-2">State</label>
+                    <input
+                      type="text"
+                      class="form-control ms-2 mt-2"
+                      name="name"
+                      value={getState.name}
+                      onChange={setdata}
+                      placeholder=""
+                      style={{ width: "100px" }}
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label ms-2 mt-2">State Code</label>
+                    <input
+                      type="text"
+                      class="form-control ms-2 mt-2"
+                      name="statecode"
+                      value={getState.statecode}
+                      onChange={setdata}
+                      placeholder=""
+                      style={{ width: "100px" }}
+                    />
+                  </div>
                 </div>
-                <footer  className="w3-container w3-grey">
-                            <button type="submit" class="btn btn-primary mt-2 mb-2 "  style={{"marginLeft":"40%"}} onClick={addinpdata}>Save</button>
-                        </footer>
-                    </form>     
+                <footer className="w3-container w3-grey">
+                  <button
+                    type="submit"
+                    class="btn btn-primary mt-2 mb-2 "
+                    style={{ marginLeft: "40%" }}
+                    onClick={addinpdata}
+                  >
+                    Save
+                  </button>
+                </footer>
+              </form>
             </div>
-            </div>
-            <div className=' col' >
-            <table class="table mt-3 ms-5" style={{ "width": "450px","height":"150px" }}>
-              <thead className='w3-black'>
+          </div>
+          <div className=" col">
+            <table
+              class="table mt-3 ms-5"
+              style={{ width: "450px", height: "150px" }}
+            >
+              <thead className="w3-black">
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Country</th>
@@ -201,51 +238,99 @@ export const State = () => {
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
-              <tbody className='w3-white'>
-                {
-                  pageData1.length > 0 ?
-                    pageData1.map((element, id) => {
-                      return (
-                        <>
-                          <tr className='table-secondary'>
-                          <td> {id+1}</td>
-                            <td>{element.countrycode}</td>
-                            <td>{element.name}</td>
-                            <td> <button className='me-3 btn w3-red' data-tooltip-id="my-tooltip" data-tooltip-content="Delete state" onClick={()=>{deletestate(element._id,element.name);}} ><DeleteIcon/></button>
-    </td>
-                          </tr>
-                        </>
-                      )
-                    }) : <div class="text-center"><div class="spinner-border m-5" role="status" style={{ "marginLeft": "10px", "marginTop": "5px" }}>
+              <tbody className="w3-white">
+                {pageData1.length > 0 ? (
+                  pageData1.map((element, id) => {
+                    const serialNumber = (page1 - 1) * 8 + id + 1;
+                    return (
+                      <>
+                        <tr className="table-secondary">
+                          <td> {serialNumber}</td>
+                          <td>{element.countrycode}</td>
+                          <td>{element.name}</td>
+                          <td>
+                            {" "}
+                            <button
+                              className="me-3 btn w3-red"
+                              data-tooltip-id="my-tooltip"
+                              data-tooltip-content="Delete state"
+                              onClick={() => {
+                                deletestate(element._id, element.name);
+                              }}
+                            >
+                              <DeleteIcon />
+                            </button>
+                          </td>
+                        </tr>
+                      </>
+                    );
+                  })
+                ) : (
+                  <div class="text-center">
+                    <div
+                      class="spinner-border m-5"
+                      role="status"
+                      style={{ marginLeft: "10px", marginTop: "5px" }}
+                    >
                       <span class="visually-hidden">Loading...</span>
-                    </div></div>
-                }
+                    </div>
+                  </div>
+                )}
               </tbody>
             </table>
-            <div className='d-flex justify-content-end'>
-              <nav aria-label="Page navigation example" >
+            <div className="d-flex justify-content-end">
+              <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                  <li class="page-item" ><button className='page-link' onClick={handlePrevious1}>prev</button></li>
-                  {
-                    Array(pageCount1).fill(null).map((ele, index) => {
+                  <li class="page-item">
+                    <button className="page-link" onClick={handlePrevious1}>
+                      prev
+                    </button>
+                  </li>
+                  {Array(pageCount1)
+                    .fill(null)
+                    .map((ele, index) => {
                       return (
                         <>
-                          <li active={page1 === index + 1 ? true : false} className='page-item' style={{"paddingLeft":"0px"}}><button className='page-link' onClick={() => setPage1(index + 1)}>{index + 1} </button></li>
+                          <li
+                            active={page1 === index + 1 ? true : false}
+                            className="page-item"
+                            style={{ paddingLeft: "0px" }}
+                          >
+                            <button
+                              className="page-link"
+                              onClick={() => setPage1(index + 1)}
+                            >
+                              {index + 1}{" "}
+                            </button>
+                          </li>
                         </>
-                      )
-                    })
-                  }
-                  <li class="page-item" style={{"paddingLeft":"0px"}}><button className='page-link' onClick={handleNext1} disabled={page1 === pageCount1} >Next</button></li>
+                      );
+                    })}
+                  <li class="page-item" style={{ paddingLeft: "0px" }}>
+                    <button
+                      className="page-link"
+                      onClick={handleNext1}
+                      disabled={page1 === pageCount1}
+                    >
+                      Next
+                    </button>
+                  </li>
                 </ul>
               </nav>
             </div>
           </div>
-            </div>
-            <Tooltip id='my-tooltip'/>
-            <ToastContainer position='top-center' autoClose="2000" hideProgressBar="true" bodyClassName="grow-font-size" closeButton={false} transition={Flip}/>
-   
-    </>
-  )
+        </div>
+        <Tooltip id="my-tooltip" />
+        <ToastContainer
+          position="top-center"
+          autoClose="2000"
+          hideProgressBar="true"
+          bodyClassName="grow-font-size"
+          closeButton={false}
+          transition={Flip}
+        />
+      </>
+    );
 }
 
 export default State;

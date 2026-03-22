@@ -207,10 +207,11 @@ export const Caste = () => {
                 {
                   pageData1.length > 0 ?
                     pageData1.map((element, id) => {
+                      const serialNumber = (page1 - 1) * 8 + id + 1;
                       return (
                         <>
                           <tr className='table-secondary'>
-                          <td> {id+1}</td>
+                          <td> {serialNumber}</td>
                             <td>{element.religion}</td>
                             <td>{element.name}</td>
                             <td> <button className='me-3 btn w3-red' data-tooltip-id="my-tooltip" data-tooltip-content="Delete caste" onClick={()=>{deletecaste(element._id);}} ><DeleteIcon/></button> </td>

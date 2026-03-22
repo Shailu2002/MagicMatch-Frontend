@@ -158,10 +158,11 @@ export const Religion = () => {
                 {
                   pageData1.length > 0 ?
                     pageData1.map((element, id) => {
+                      const serialNumber = (page1 - 1) * 8 + id + 1;
                       return (
                         <>
                           <tr className='table-secondary'>
-                            <td>{id+1}</td>
+                            <td>{serialNumber}</td>
                             <td>{element.name}</td>
                             <td> <button className='me-3 btn w3-red' data-tooltip-id="my-tooltip" data-tooltip-content="Delete religion" onClick={()=>{deletereligion(element._id,element.name);}} ><DeleteIcon/></button> </td>
                      

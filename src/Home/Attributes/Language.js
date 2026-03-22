@@ -122,7 +122,6 @@ export const Language = () => {
       }
     }, [languagelist])
 
-
   return (
     
     <>
@@ -158,17 +157,31 @@ export const Language = () => {
               <tbody className='w3-white'>
                 {
                   pageData1.length > 0 ?
-                    pageData1.map((element, id) => {
+                  pageData1.map((element, id) => {
+                       const serialNumber = (page1 - 1) * 8 + id + 1;
                       return (
                         <>
-                          <tr className='table-secondary'>
-                            <td>{id+1}</td>
+                          <tr className="table-secondary">
+                            <td>
+                            {serialNumber}
+                            </td>
                             <td>{element.name}</td>
-                            <td> <button className='me-3 btn w3-red' data-tooltip-id="my-tooltip" data-tooltip-content="Delete language" onClick={()=>{deletelanguage(element._id);}} ><DeleteIcon/></button> </td>
-                     
+                            <td>
+                              {" "}
+                              <button
+                                className="me-3 btn w3-red"
+                                data-tooltip-id="my-tooltip"
+                                data-tooltip-content="Delete language"
+                                onClick={() => {
+                                  deletelanguage(element._id);
+                                }}
+                              >
+                                <DeleteIcon />
+                              </button>{" "}
+                            </td>
                           </tr>
                         </>
-                      )
+                      );
                     }) : <div class="text-center"><div class="spinner-border m-5" role="status" style={{ "marginLeft": "10px", "marginTop": "5px" }}>
                       <span class="visually-hidden">Loading...</span>
                     </div></div>
