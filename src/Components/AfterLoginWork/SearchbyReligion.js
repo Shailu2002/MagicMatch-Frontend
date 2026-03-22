@@ -14,6 +14,7 @@ const SearchbyReligion = () => {
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },

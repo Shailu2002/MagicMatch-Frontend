@@ -33,10 +33,11 @@ const SearchCard = ({ user }) => {
         method: "GET",
         headers: {
           "content-type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
-        );
+    );
         if (res.status === 401) {
           console.log("Authentication failed: No token or invalid token");
           localStorage.clear(); // Safety ke liye storage saaf karein
@@ -158,6 +159,7 @@ const SearchCard = ({ user }) => {
                                                                   headers: {
                                                                     "Content-Type":
                                                                       "application/json",
+                                                                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                                                                   },
                                                                   credentials:
                                                                     "include",

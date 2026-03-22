@@ -1,6 +1,7 @@
 import  { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import axios from "axios";
 const SuccessCard = () => {
   const [data, setdata] = useState([]);
   const Succesd = (element) => {
@@ -34,23 +35,22 @@ const SuccessCard = () => {
     );
   };
 
-  const getdata = async () => {
-    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/getalldata`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-    const datas = await res.json();
-    console.log(datas);
-    if (!datas || res.status === 404) {
-    } else {
-      setdata(datas);
-      console.log(datas);
-      console.log("Data has been retrive");
-    }
-  };
+ const getdata = async () => {
+   try {
+     const res = await axios.get("/getalldata");
+     const datas = res.data;
+     if (datas) {
+       setdata(datas);
+       console.log(datas);
+     }
+   } catch (error) {
+     if (error.response && error.response.status === 404) {
+       console.log("Data not found");
+     } else {
+       console.error(error.message);
+     }
+   }
+ };
   useEffect(() => {
     getdata();
   }, []);

@@ -13,9 +13,10 @@ const Membership = () => {
             method: "GET",
             headers: {
               "content-type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`,
             },
-            credentials:"include",
-          }
+            credentials: "include",
+          },
         );
         if (res.status === 401) {
           console.log("Authentication failed: No token or invalid token");

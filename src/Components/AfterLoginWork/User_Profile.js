@@ -36,6 +36,7 @@ const User_Profile = () => {
           method: "GET",
           headers: {
             "content-type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           credentials: "include",
         },

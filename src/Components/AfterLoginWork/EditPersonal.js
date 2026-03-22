@@ -32,6 +32,7 @@ const EditPersonal = () => {
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -60,6 +61,7 @@ const EditPersonal = () => {
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -87,6 +89,7 @@ const EditPersonal = () => {
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -114,6 +117,7 @@ const EditPersonal = () => {
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -140,6 +144,7 @@ const EditPersonal = () => {
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -166,6 +171,7 @@ const EditPersonal = () => {
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -232,8 +238,9 @@ const EditPersonal = () => {
               method: "PATCH",
               headers: {
                 "content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
               },
-              credentials:"include",
+              credentials: "include",
               body: JSON.stringify({
                 user_age,
                 user_religion,
@@ -245,7 +252,7 @@ const EditPersonal = () => {
                 user_state,
                 user_city,
               }),
-            }
+            },
           );
          if (res2.status === 401) {
            console.log("Authentication failed: No token or invalid token");
@@ -277,6 +284,7 @@ const EditPersonal = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },

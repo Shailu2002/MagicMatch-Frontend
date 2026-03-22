@@ -34,6 +34,7 @@ const EditPartner = () => {
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -70,6 +71,7 @@ const [partner_city,setcity]=useState([]);
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -100,6 +102,7 @@ const [partner_city,setcity]=useState([]);
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -137,6 +140,7 @@ const [partner_city,setcity]=useState([]);
         method: "GET",
         headers: {
           "content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -207,6 +211,7 @@ const [partner_city,setcity]=useState([]);
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
@@ -345,6 +350,7 @@ const [partner_city,setcity]=useState([]);
               method: "PATCH",
               headers: {
                 "content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
               },
               credentials: "include",
               body: JSON.stringify({

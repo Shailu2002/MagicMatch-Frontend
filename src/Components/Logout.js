@@ -9,6 +9,7 @@ const Logout = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
           },
           // YE SABSE ZAROORI HAI: Cookies bhejne ke liye
           credentials: "include",
@@ -23,13 +24,15 @@ const Logout = () => {
           navigate("/login", { replace: true });
         } else {
           // Koi aur error aaye toh
+           localStorage.clear();
           const data = await res.json();
           console.log("Logout failed", data);
-          navigate("/login");
+             navigate("/login", { replace: true });
         }
       } catch (err) {
+         localStorage.clear();
         console.log("Logout Network Error:", err);
-        navigate("/login"); // Kuch bhi galat ho, login pe bhej do
+           navigate("/login", { replace: true });// Kuch bhi galat ho, login pe bhej do
       }
     };
 

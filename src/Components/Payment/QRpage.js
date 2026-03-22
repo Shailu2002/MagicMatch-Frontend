@@ -39,8 +39,9 @@ const QRpage = () => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
               },
-              credentials:"include",
+              credentials: "include",
               body: JSON.stringify({
                 user_id,
                 transaction_id,
@@ -53,7 +54,7 @@ const QRpage = () => {
                 amount_received,
                 user_email_id,
               }),
-            }
+            },
           ); 
           if (pay.status === 401) {
             console.log("Authentication failed: No token or invalid token");

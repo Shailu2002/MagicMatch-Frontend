@@ -54,8 +54,11 @@ const LoginHome = () => {
         `${process.env.REACT_APP_BACKEND_URL}/gethomedata/${uind}`,
         {
           method: "GET",
-          headers: { "content-type": "application/json" },
-          credentials:"include",
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          credentials: "include",
         },
       );
 

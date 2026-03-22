@@ -28,11 +28,12 @@ const MatchCard = ({ users, iduser }) => {
       `${process.env.REACT_APP_BACKEND_URL}/getalldetails_data/${uind}`,
       {
         method: "GET",
-        credentials:"include",
+        credentials: "include",
         headers: {
           "content-type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      }
+      },
     );
       if (res.status === 401) {
         console.log("Authentication failed: No token or invalid token");
@@ -284,6 +285,7 @@ const MatchCard = ({ users, iduser }) => {
                                     credentials: "include",
                                     headers: {
                                       "Content-Type": "application/json",
+                                      Authorization: `Bearer ${localStorage.getItem("token")}`,
                                     },
                                     body: JSON.stringify({
                                       user_id,

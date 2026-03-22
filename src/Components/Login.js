@@ -43,13 +43,13 @@ const Login = () => {
       console.log(resp.user_id);
       if (sign.status === 200)
       {
-        const gen = (Math.floor(Math.random() * (999999 - 1000000 + 1)) + 10).toString();
-        localStorage.setItem("luser_id", resp.user_id);
-        localStorage.setItem("lid", resp._id);
+        const userData = resp.user;
+        const jwtToken = resp.token;
+        localStorage.setItem("luser_id", userData.user_id);
+        localStorage.setItem("lid", userData._id);
         localStorage.setItem("ecount","1");
-        localStorage.setItem("user_email", resp.user_email);
-        localStorage.setItem("token", gen + resp._id);
-        console.log(localStorage.getItem("token"));
+        localStorage.setItem("user_email", userData.user_email);
+        localStorage.setItem("token", jwtToken);
         history("/loginhome", {replace:true});
       }
       else if (sign.status === 201)

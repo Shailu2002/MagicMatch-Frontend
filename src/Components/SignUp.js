@@ -39,8 +39,9 @@ const Signup = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
           },
-          credentials:"include",
+          credentials: "include",
           body: JSON.stringify({
             user_id,
             user_date,
@@ -49,7 +50,7 @@ const Signup = () => {
             user_pass,
             activeStatus,
           }),
-        }
+        },
       );
     
                 const resp = await sign.json();

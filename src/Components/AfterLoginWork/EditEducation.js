@@ -39,8 +39,9 @@ validationSchema:validationSchema,
         method: "PATCH",
         headers: {
           "content-type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
-        credentials:"include",
+        credentials: "include",
         body: JSON.stringify({
           user_highest_qualification,
           user_working_with,
@@ -48,7 +49,7 @@ validationSchema:validationSchema,
           user_annual_income,
           show_annual_income,
         }),
-      }
+      },
     );
   if (res.status === 401) {
     console.log("Authentication failed: No token or invalid token");
@@ -76,6 +77,7 @@ validationSchema:validationSchema,
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         credentials: "include",
       },
