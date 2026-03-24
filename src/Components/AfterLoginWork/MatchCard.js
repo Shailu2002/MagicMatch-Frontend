@@ -46,42 +46,47 @@ const MatchCard = ({ users, iduser }) => {
       toast.error("Something Went Wrong");
     } else if (res.status === 200) {
       setiddata(data);
-      console.log("just outside for loop");
-      let mess = "";
-      for (let i = 0; i < users.length; i++) {
-        console.log("inside for loop");
-        mess = mess + users[i].user_name + " (" + users[i].user_id + ")" + ",";
-      }
-
-      if (form.current && form.current.message) {
-        form.current.message.value = mess;
-      }
-
-      if (counter == "1") {
-        //match email
-        emailjs
-          .sendForm(
-            "service_s7bc7so",
-            "template_5r34th9",
-            form.current,
-            "7apsjFDK6tP05LZc-"
-          )
-          .then(
-            (result) => {
-              console.log(result.text);
-            },
-            (error) => {
-              console.log(error.text);
-            }
-          );
-
-        localStorage.setItem("ecount", "2");
-      }
     }
   };
   const sendpayment = () => {
     history("/membership");
   };
+
+  useEffect(() => {
+    const sendMatchEmail = async () => {
+      const counter = localStorage.getItem("ecount");
+
+      // Check if we have users and counter is "1"
+      if (users && users.length > 0 && counter === "1") {
+        let mess = "";
+        users.forEach((u) => {
+          mess += `${u.user_name} (${u.user_id}), `;
+        });
+
+        const templateParams = {
+          user_email: localStorage.getItem("user_email"),
+          user_name: localStorage.getItem("name"),
+          message: mess, // Ab ye empty nahi jayega
+          send_name: "MagicMatch Admin",
+        };
+
+        try {
+          const result = await emailjs.send(
+            "service_s7bc7so",
+            "template_5r34th9",
+            templateParams,
+            "7apsjFDK6tP05LZc-",
+          );
+          console.log("Match Email Sent:", result.text);
+          localStorage.setItem("ecount", "2"); // Stop duplicate emails
+        } catch (error) {
+          console.log("Email Error:", error);
+        }
+      }
+    };
+
+    sendMatchEmail();
+  }, [users]);
   const handlenext = () => {
     if (page === pagecount) {
       return page;
