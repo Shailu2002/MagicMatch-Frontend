@@ -16,7 +16,7 @@ const Login = () => {
   const pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
   const validationSchema = yup.object({
     user_email: yup.string().email("Email is invalid").required("email is required"),
-    user_password: yup.string().required("Enter Password"),
+    user_password: yup.string().required("password is required"),
   });
   const formik = useFormik({
   initialValues: defaultValues,
