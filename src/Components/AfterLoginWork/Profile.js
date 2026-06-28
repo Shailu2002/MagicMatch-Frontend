@@ -9,8 +9,6 @@ const Profile = () => {
   const data = location.state.data;
   const form = useRef();
   const userdata = location.state.iddata;
-  console.log(data);
-  console.log(userdata.Payment.length);
   let flag = 1;
   let count = 2;
   let i = -1;
@@ -25,6 +23,7 @@ const Profile = () => {
     message_reply: null,
     reply_date: null,
   });
+  console.log(data.PhotoData?.user_photo );
   const match = [];
   const usermatchdata = [];
   const [matchfield, setmatchfield] = useState(match);
@@ -33,8 +32,8 @@ const Profile = () => {
   const searchmatching = () => {
     flag = 2;
     let currentuserage = userdata.user_age;
-    let preminage = data.partner[0].partner_min_age;
-    let premaxage = data.partner[0].partner_max_age;
+    let preminage = data.partnerPrefData.partner_min_age;
+    let premaxage = data.partnerPrefData.partner_max_age;
     if (currentuserage >= preminage && currentuserage <= premaxage) {
       match.push("partner_min_age");
       setmatchfield(match);
@@ -42,8 +41,10 @@ const Profile = () => {
     usermatchdata.push(currentuserage);
     setusermatch(usermatchdata);
     let currentuserheight = Number(userdata.general[0].user_height.slice(0, 3));
-    let preminheight = Number(data.partner[0].partner_min_height.slice(0, 3));
-    let premaxheight = Number(data.partner[0].partner_max_height.slice(0, 3));
+    let preminheight = Number(data.partnerPrefData.partner_min_height.slice(0, 3));
+    let premaxheight = Number(
+      data.partnerPrefData.partner_max_height.slice(0, 3),
+    );
     //matching both profiles height
     if (currentuserheight >= preminheight && currentuserage <= premaxheight) {
       match.push("partner_min_height");
@@ -53,15 +54,15 @@ const Profile = () => {
     setusermatch(usermatchdata);
 
     //matching both profiles marital status
-    if (data.partner[0].partner_marital_status.includes("open to all")) {
-      console.log(data.partner[0].partner_marital_status);
+    if (data.partnerPrefData.partner_marital_status.includes("open to all")) {
+      console.log(data.partnerPrefData.partner_marital_status);
     } else {
       count++;
       usermatchdata.push(userdata.user_marital);
       setusermatch(usermatchdata);
 
       if (
-        data.partner[0].partner_marital_status.includes(userdata.user_marital)
+        data.partnerPrefData.partner_marital_status.includes(userdata.user_marital)
       ) {
         match.push("partner_marital_status");
         setmatchfield(match);
@@ -69,52 +70,58 @@ const Profile = () => {
     }
 
     //matching religion
-    if (data.partner[0].partner_religion.includes("open to all")) {
-      console.log(data.partner[0].partner_religion);
+    if (data.partnerPrefData.partner_religion.includes("open to all")) {
+      console.log(data.partnerPrefData.partner_religion);
     } else {
       count++;
       usermatchdata.push(userdata.user_religion);
       setusermatch(usermatchdata);
-      if (data.partner[0].partner_religion.includes(userdata.user_religion)) {
+      if (
+        data.partnerPrefData.partner_religion.includes(userdata.user_religion)
+      ) {
         match.push("partner_religion");
         setmatchfield(match);
       }
     }
 
-    if (data.partner[0].partner_diet.includes("open to all")) {
-      console.log(data.partner[0].partner_diet);
+    if (data.partnerPrefData.partner_diet.includes("open to all")) {
+      console.log(data.partnerPrefData.partner_diet);
     } else {
       count++;
       usermatchdata.push(userdata.general[0].user_diet);
       setusermatch(usermatchdata);
       if (
-        data.partner[0].partner_diet.includes(userdata.general[0].user_diet)
+        data.partnerPrefData.partner_diet.includes(
+          userdata.general[0].user_diet,
+        )
       ) {
         match.push("partner_diet");
         setmatchfield(match);
       }
     }
 
-    if (data.partner[0].partner_mtongue.includes("open to all")) {
-      console.log(data.partner[0].partner_mtongue);
+    if (data.partnerPrefData.partner_mtongue.includes("open to all")) {
+      console.log(data.partnerPrefData.partner_mtongue);
     } else {
       count++;
       usermatchdata.push(userdata.user_mtongue);
       setusermatch(usermatchdata);
-      if (data.partner[0].partner_mtongue.includes(userdata.user_mtongue)) {
+      if (
+        data.partnerPrefData.partner_mtongue.includes(userdata.user_mtongue)
+      ) {
         match.push("partner_mtongue");
         setmatchfield(match);
       }
     }
 
-    if (data.partner[0].partner_highest_qualification.includes("open to all")) {
-      console.log(data.partner[0].partner_highest_qualification);
+    if (data.partnerPrefData.partner_highest_qualification.includes("open to all")) {
+      console.log(data.partnerPrefData.partner_highest_qualification);
     } else {
       count++;
       usermatchdata.push(userdata.educational[0].user_highest_qualification);
       setusermatch(usermatchdata);
       if (
-        data.partner[0].partner_highest_qualification.includes(
+        data.partnerPrefData.partner_highest_qualification.includes(
           userdata.educational[0].user_highest_qualification,
         )
       ) {
@@ -123,14 +130,14 @@ const Profile = () => {
       }
     }
 
-    if (data.partner[0].partner_working_with.includes("open to all")) {
-      console.log(data.partner[0].partner_working_with);
+    if (data.partnerPrefData.partner_working_with.includes("open to all")) {
+      console.log(data.partnerPrefData.partner_working_with);
     } else {
       count++;
       usermatchdata.push(userdata.educational[0].user_working_with);
       setusermatch(usermatchdata);
       if (
-        data.partner[0].partner_working_with.includes(
+        data.partnerPrefData.partner_working_with.includes(
           userdata.educational[0].user_working_with,
         )
       ) {
@@ -139,13 +146,13 @@ const Profile = () => {
       }
     }
 
-    if (data.partner[0].partner_profession.includes("open to all")) {
+    if (data.partnerPrefData.partner_profession.includes("open to all")) {
     } else {
       count++;
       usermatchdata.push(userdata.educational[0].user_profession);
       setusermatch(usermatchdata);
       if (
-        data.partner[0].partner_profession.includes(
+        data.partnerPrefData.partner_profession.includes(
           userdata.educational[0].user_profession,
         )
       ) {
@@ -154,36 +161,38 @@ const Profile = () => {
       }
     }
 
-    if (data.partner[0].partner_country.includes("open to all")) {
+    if (data.partnerPrefData.partner_country.includes("open to all")) {
     } else {
       count++;
       usermatchdata.push(userdata.user_country);
       setusermatch(usermatchdata);
-      if (data.partner[0].partner_country.includes(userdata.user_country)) {
+      if (
+        data.partnerPrefData.partner_country.includes(userdata.user_country)
+      ) {
         match.push("partner_country");
         setmatchfield(match);
       }
     }
 
-    if (data.partner[0].partner_state.includes("open to all")) {
-      console.log(data.partner[0].partner_state);
+    if (data.partnerPrefData.partner_state.includes("open to all")) {
+      console.log(data.partnerPrefData.partner_state);
     } else {
       count++;
       usermatchdata.push(userdata.user_state);
       setusermatch(usermatchdata);
-      if (data.partner[0].partner_state.includes(userdata.user_state)) {
+      if (data.partnerPrefData.partner_state.includes(userdata.user_state)) {
         match.push("partner_state");
         setmatchfield(match);
       }
     }
 
-    if (data.partner[0].partner_city.includes("open to all")) {
-      console.log(data.partner[0].partner_city);
+    if (data.partnerPrefData.partner_city.includes("open to all")) {
+      console.log(data.partnerPrefData.partner_city);
     } else {
       count++;
       usermatchdata.push(userdata.user_city);
       setusermatch(usermatchdata);
-      if (data.partner[0].partner_city.includes(userdata.user_city)) {
+      if (data.partnerPrefData.partner_city.includes(userdata.user_city)) {
         match.push("partner_city");
         setmatchfield(match);
       }
@@ -206,7 +215,7 @@ const Profile = () => {
 
   const viewkundali = () => {
     history("/viewkundali", {
-      state: { kundali: data.kundalis[0].user_kundali },
+      state: { kundali: data.kundalis[0]?.user_kundali },
     });
   };
   const checkdiet = (element) => {
@@ -303,8 +312,8 @@ const Profile = () => {
             className="card"
           >
             <div className="card-body">
-              {data.Payment[0] ? (
-                data.Payment[0].approval_status === 1 ? (
+              {data.paymentData? (
+                data.paymentData.approval_status === 1 ? (
                   <p className="text-danger">Premium Member</p>
                 ) : null
               ) : null}
@@ -318,10 +327,10 @@ const Profile = () => {
                         borderRadius: "100%",
                       }}
                       alt=""
-                      src={data.Details[0].user_photo}
+                      src={data.photoData?.user_photo}
                     />
                   </div>
-                  <div
+                 <div
                     style={{ borderRight: "1px solid gray" }}
                     className="col-sm-6"
                   >
@@ -330,7 +339,7 @@ const Profile = () => {
                     <div className="row">
                       <div className="col-sm-6">
                         <p>
-                          {data.user_age} yrs, {data.general[0].user_height}
+                          {data.user_age} yrs, {data.generalData?.user_height}
                         </p>
                         <p>
                           {data.user_religion},{data.user_caste}
@@ -342,7 +351,7 @@ const Profile = () => {
                         <p>
                           {data.user_city},{data.user_state},{data.user_country}
                         </p>
-                        <p>{data.educational[0].user_profession}</p>
+                        <p>{data.educationData?.user_profession}</p>
                       </div>
                     </div>
                   </div>
@@ -363,8 +372,8 @@ const Profile = () => {
                         </button>{" "}
                         <p>Upgrade to Connect</p>
                       </div>
-                    ) : userdata.Payment[0].approval_status === 0 ||
-                      userdata.Payment[0].approval_status === -1 ? (
+                    ) : userdata.Payment.approval_status === 0 ||
+                      userdata.Payment.approval_status === 1 ? (
                       <div>
                         {" "}
                         <button
@@ -398,7 +407,7 @@ const Profile = () => {
                   <input
                     hidden
                     type="email"
-                    value={data.contact[0].user_email}
+                    value={data.signupData.user_email}
                     name="user_email"
                   />
                   <input
@@ -445,21 +454,21 @@ const Profile = () => {
                     Complexion :{" "}
                     <span className="text-secondary">
                       {" "}
-                      {data.general[0].user_complexion}
+                      {data.generalData.user_complexion}
                     </span>
                   </p>
                   <p>
                     Blood Group :{" "}
                     <span className="text-secondary">
                       {" "}
-                      {data.general[0].user_blood_group}
+                      {data.generalData.user_blood_group}
                     </span>
                   </p>
                   <p>
                     Body Type :{" "}
                     <span className="text-secondary">
                       {" "}
-                      {data.general[0].user_body_type}
+                      {data.generalData.user_body_type}
                     </span>
                   </p>
                   <p></p>
@@ -483,7 +492,7 @@ const Profile = () => {
                     </span>{" "}
                   </h4>
                   <ul type="none">
-                    {data.general[0].user_hobbies.map((element) => {
+                    {data.generalData.user_hobbies.map((element) => {
                       return <li>{element}</li>;
                     })}
                   </ul>
@@ -535,8 +544,8 @@ const Profile = () => {
                       </p>
                       <hr />
                     </div>
-                  ) : userdata.Payment[0].approval_status == 0 ||
-                    userdata.Payment[0].approval_status == -1 ? (
+                  ) : userdata.Payment.approval_status == 0 ||
+                    userdata.Payment.approval_status == 1 ? (
                     <div>
                       Email{" "}
                       <button
@@ -573,13 +582,13 @@ const Profile = () => {
                         Email :{" "}
                         <span className="text-secondary">
                           {" "}
-                          {data.contact[0].user_email}
+                          {data.signupData.user_email}
                         </span>
                       </p>
                       <p>
                         Contact Number :{" "}
                         <span className="text-secondary">
-                          {data.contact[0].user_contact}
+                          {data.signupData.user_contact}
                         </span>
                       </p>
                       <hr />
@@ -603,8 +612,8 @@ const Profile = () => {
                     <span className="headingprofile">Diet</span>
                   </h3>
                   <div className="ms-5">
-                    {checkdiet(data.general[0].user_diet)}
-                    <p>{data.general[0].user_diet}</p>
+                    {checkdiet(data.generalData.user_diet)}
+                    <p>{data.generalData.user_diet}</p>
                   </div>
 
                   <hr />
@@ -628,27 +637,27 @@ const Profile = () => {
                   <p>
                     Qualification :{" "}
                     <span className="text-secondary">
-                      {data.educational[0].user_highest_qualification}
+                      {data.educationData.user_highest_qualification}
                     </span>
                   </p>
                   <p>
                     Working in :{" "}
                     <span className="text-secondary">
-                      {data.educational[0].user_working_with}
+                      {data.educationData.user_working_with}
                     </span>
                   </p>
-                  {data.educational[0].show_annual_income == 1 ? (
+                  {data.educationData?.show_annual_income == 1 ? (
                     <p>
                       Income :{" "}
                       <span className="text-secondary">
-                        {data.educational[0].user_annual_income}
+                        {data.educationData?.user_annual_income}
                       </span>
                     </p>
                   ) : null}
                   <hr />
                 </div>
 
-                {data.kundalis[0] ? (
+                {data.kundalis ? (
                   <div>
                     <h4>
                       {" "}
@@ -688,10 +697,10 @@ const Profile = () => {
                       <div>
                         <p>
                           Date of Birth:{" "}
-                          <span>{data.kundalis[0].user_dob}</span>
+                          <span>{data.kundalis[0]?.user_dob}</span>
                         </p>
                         <p>
-                          Sun Sign: <span>{data.kundalis[0].user_sunsign}</span>
+                          Sun Sign: <span>{data.kundalis[0]?.user_sunsign}</span>
                         </p>
                         <button
                           style={{
@@ -740,13 +749,13 @@ const Profile = () => {
                           border: "2px solid black",
                         }}
                         alt=""
-                        src={data.Details[0].user_photo}
+                        src={data.photoData?.user_photo}
                       />
                     </div>
                     <div className="col-sm-6">
                       <h3>
                         {" "}
-                        You match {matchfield.length} / {totalp} preferences
+                        You match {matchfield?.length} / {totalp} preferences
                       </h3>
                     </div>
                     <div className="col-sm-3">
@@ -758,7 +767,7 @@ const Profile = () => {
                           border: "2px solid black",
                         }}
                         alt=""
-                        src={userdata.photos[0].user_photo}
+                        src={userdata.photos[0]?.user_photo}
                       />
                     </div>
                   </div>
@@ -766,8 +775,8 @@ const Profile = () => {
                     <div className="col-sm-9">
                       <label className="text-danger">Age</label>
                       <p>
-                        {data.partner[0].partner_min_age} to{" "}
-                        {data.partner[0].partner_max_age}
+                        {data.partnerPrefData.partner_min_age} to{" "}
+                        {data.partnerPrefData.partner_max_age}
                       </p>
                     </div>
                     <div className="col-sm-3">
@@ -786,8 +795,8 @@ const Profile = () => {
                       <label className="text-danger"> Height </label>
                       <p>
                         {" "}
-                        {data.partner[0].partner_min_height} to{" "}
-                        {data.partner[0].partner_max_height}
+                        {data.partnerPrefData.partner_min_height} to{" "}
+                        {data.partnerPrefData.partner_max_height}
                       </p>
                     </div>
                     <div className="col-sm-3">
@@ -803,13 +812,13 @@ const Profile = () => {
 
                   <div className="row mt-2">
                     <div className="col-sm-9">
-                      {data.partner[0].partner_marital_status.includes(
+                      {data.partnerPrefData.partner_marital_status.includes(
                         "open to all",
                       ) ? null : (
                         <div>
                           <label className="text-danger">Marital Status</label>
                           <p>
-                            {data.partner[0].partner_marital_status.map((e) => {
+                            {data.partnerPrefData.partner_marital_status.map((e) => {
                               return <li style={{ display: "inline" }}>{e}</li>;
                             })}
                           </p>
@@ -818,7 +827,7 @@ const Profile = () => {
                       )}
                     </div>{" "}
                     <div className="col-sm-3">
-                      {data.partner[0].partner_marital_status.includes(
+                      {data.partnerPrefData.partner_marital_status.includes(
                         "open to all",
                       ) ? null : (
                         <div>
@@ -836,13 +845,13 @@ const Profile = () => {
 
                   <div className="row mt-2">
                     <div className="col-sm-9">
-                      {data.partner[0].partner_religion.includes(
+                      {data.partnerPrefData.partner_religion.includes(
                         "open to all",
                       ) ? null : (
                         <div>
                           <label className="text-danger">Religion</label>
                           <p>
-                            {data.partner[0].partner_religion.map((e) => {
+                            {data.partnerPrefData.partner_religion.map((e) => {
                               return <li style={{ display: "inline" }}>{e}</li>;
                             })}
                           </p>
@@ -851,7 +860,7 @@ const Profile = () => {
                       )}
                     </div>{" "}
                     <div className="col-sm-3">
-                      {data.partner[0].partner_religion.includes(
+                      {data.partnerPrefData.partner_religion.includes(
                         "open to all",
                       ) ? null : (
                         <div>
@@ -869,13 +878,13 @@ const Profile = () => {
 
                   <div className="row mt-2">
                     <div className="col-sm-9">
-                      {data.partner[0].partner_diet.includes(
+                      {data.partnerPrefData.partner_diet.includes(
                         "open to all",
                       ) ? null : (
                         <div>
                           <label className="text-danger">Diet</label>
                           <p>
-                            {data.partner[0].partner_diet.map((e) => {
+                            {data.partnerPrefData.partner_diet.map((e) => {
                               return <li style={{ display: "inline" }}>{e}</li>;
                             })}
                           </p>
@@ -884,7 +893,7 @@ const Profile = () => {
                       )}
                     </div>{" "}
                     <div className="col-sm-3">
-                      {data.partner[0].partner_diet.includes(
+                      {data.partnerPrefData.partner_diet.includes(
                         "open to all",
                       ) ? null : (
                         <div>
@@ -900,13 +909,13 @@ const Profile = () => {
                   </div>
                   <div className="row mt-2">
                     <div className="col-sm-9">
-                      {data.partner[0].partner_mtongue.includes(
+                      {data.partnerPrefData.partner_mtongue.includes(
                         "open to all",
                       ) ? null : (
                         <div>
                           <label className="text-danger">Mother Tongue</label>
                           <p>
-                            {data.partner[0].partner_mtongue.map((e) => {
+                            {data.partnerPrefData.partner_mtongue.map((e) => {
                               return <li style={{ display: "inline" }}>{e}</li>;
                             })}
                           </p>
@@ -915,7 +924,7 @@ const Profile = () => {
                       )}
                     </div>{" "}
                     <div className="col-sm-3">
-                      {data.partner[0].partner_mtongue.includes(
+                      {data.partnerPrefData.partner_mtongue.includes(
                         "open to all",
                       ) ? null : (
                         <div>
@@ -932,13 +941,13 @@ const Profile = () => {
 
                   <div className="row mt-2">
                     <div className="col-sm-9">
-                      {data.partner[0].partner_highest_qualification.includes(
+                      {data.partnerPrefData.partner_highest_qualification.includes(
                         "open to all",
                       ) ? null : (
                         <div>
                           <label className="text-danger">Qualification</label>
                           <p>
-                            {data.partner[0].partner_highest_qualification.map(
+                            {data.partnerPrefData.partner_highest_qualification.map(
                               (e) => {
                                 return (
                                   <li style={{ display: "inline" }}>{e}</li>
@@ -951,7 +960,7 @@ const Profile = () => {
                       )}
                     </div>{" "}
                     <div className="col-sm-3">
-                      {data.partner[0].partner_highest_qualification.includes(
+                      {data.partnerPrefData.partner_highest_qualification.includes(
                         "open to all",
                       ) ? null : (
                         <div>
@@ -971,13 +980,13 @@ const Profile = () => {
 
                   <div className="row mt-2">
                     <div className="col-sm-9">
-                      {data.partner[0].partner_working_with.includes(
+                      {data.partnerPrefData.partner_working_with.includes(
                         "open to all",
                       ) ? null : (
                         <div>
                           <label className="text-danger">Working With</label>
                           <p>
-                            {data.partner[0].partner_working_with.map((e) => {
+                            {data.partnerPrefData.partner_working_with.map((e) => {
                               return <li style={{ display: "inline" }}>{e}</li>;
                             })}
                           </p>
@@ -986,7 +995,7 @@ const Profile = () => {
                       )}
                     </div>{" "}
                     <div className="col-sm-3">
-                      {data.partner[0].partner_working_with.includes(
+                      {data.partnerPrefData.partner_working_with.includes(
                         "open to all",
                       ) ? null : (
                         <div>
@@ -1003,13 +1012,13 @@ const Profile = () => {
 
                   <div className="row mt-2">
                     <div className="col-sm-9">
-                      {data.partner[0].partner_profession.includes(
+                      {data.partnerPrefData.partner_profession.includes(
                         "open to all",
                       ) ? null : (
                         <div>
                           <label className="text-danger">profession</label>
                           <p>
-                            {data.partner[0].partner_profession.map((e) => {
+                            {data.partnerPrefData.partner_profession.map((e) => {
                               return <li style={{ display: "inline" }}>{e}</li>;
                             })}
                           </p>
@@ -1018,7 +1027,7 @@ const Profile = () => {
                       )}
                     </div>{" "}
                     <div className="col-sm-3">
-                      {data.partner[0].partner_profession.includes(
+                      {data.partnerPrefData.partner_profession.includes(
                         "open to all",
                       ) ? null : (
                         <div>
@@ -1035,13 +1044,13 @@ const Profile = () => {
 
                   <div className="row mt-2">
                     <div className="col-sm-9">
-                      {data.partner[0].partner_country.includes(
+                      {data.partnerPrefData.partner_country.includes(
                         "open to all",
                       ) ? null : (
                         <div>
                           <label className="text-danger">Country</label>
                           <p>
-                            {data.partner[0].partner_country.map((e) => {
+                            {data.partnerPrefData.partner_country.map((e) => {
                               return <li style={{ display: "inline" }}>{e}</li>;
                             })}
                           </p>
@@ -1050,7 +1059,7 @@ const Profile = () => {
                       )}
                     </div>{" "}
                     <div className="col-sm-3">
-                      {data.partner[0].partner_country.includes(
+                      {data.partnerPrefData.partner_country.includes(
                         "open to all",
                       ) ? null : (
                         <div>
@@ -1067,13 +1076,13 @@ const Profile = () => {
 
                   <div className="row mt-2">
                     <div className="col-sm-9">
-                      {data.partner[0].partner_state.includes(
+                      {data.partnerPrefData.partner_state.includes(
                         "open to all",
                       ) ? null : (
                         <div>
                           <label className="text-danger">State</label>
                           <p>
-                            {data.partner[0].partner_state.map((e) => {
+                            {data.partnerPrefData.partner_state.map((e) => {
                               return <li style={{ display: "inline" }}>{e}</li>;
                             })}
                           </p>
@@ -1082,7 +1091,7 @@ const Profile = () => {
                       )}
                     </div>{" "}
                     <div className="col-sm-3">
-                      {data.partner[0].partner_state.includes(
+                      {data.partnerPrefData.partner_state.includes(
                         "open to all",
                       ) ? null : (
                         <div>
@@ -1100,13 +1109,13 @@ const Profile = () => {
 
                   <div className="row mt-2">
                     <div className="col-sm-9">
-                      {data.partner[0].partner_city.includes(
+                      {data.partnerPrefData.partner_city.includes(
                         "open to all",
                       ) ? null : (
                         <div>
                           <label className="text-danger">City</label>
                           <p>
-                            {data.partner[0].partner_city.map((e) => {
+                            {data.partnerPrefData.partner_city.map((e) => {
                               return <li style={{ display: "inline" }}>{e}</li>;
                             })}
                           </p>
@@ -1115,7 +1124,7 @@ const Profile = () => {
                       )}
                     </div>{" "}
                     <div className="col-sm-3">
-                      {data.partner[0].partner_city.includes(
+                      {data.partnerPrefData.partner_city.includes(
                         "open to all",
                       ) ? null : (
                         <div>

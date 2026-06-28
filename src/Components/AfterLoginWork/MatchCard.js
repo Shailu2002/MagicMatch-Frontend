@@ -9,7 +9,6 @@ const MatchCard = ({ users, iduser }) => {
   const [page, setpage] = useState(1);
   const [pagecount, setpagecount] = useState(0);
   const counter = localStorage.getItem("ecount");
-  console.log(users);
   const history=  useNavigate();
   const form = useRef();
   const [getuserdata, setuserdata] = useState({
@@ -52,41 +51,41 @@ const MatchCard = ({ users, iduser }) => {
     history("/membership");
   };
 
-  useEffect(() => {
-    const sendMatchEmail = async () => {
-      const counter = localStorage.getItem("ecount");
+  // useEffect(() => {
+  //   const sendMatchEmail = async () => {
+  //     const counter = localStorage.getItem("ecount");
 
-      // Check if we have users and counter is "1"
-      if (users && users.length > 0 && counter === "1") {
-        let mess = "";
-        users.forEach((u) => {
-          mess += `${u.user_name} (${u.user_id}), `;
-        });
+  //     // Check if we have users and counter is "1"
+  //     if (users && users.length > 0 && counter === "1") {
+  //       let mess = "";
+  //       users.forEach((u) => {
+  //         mess += `${u.user_name} (${u.user_id}), `;
+  //       });
 
-        const templateParams = {
-          user_email: localStorage.getItem("user_email"),
-          user_name: localStorage.getItem("name"),
-          message: mess, // Ab ye empty nahi jayega
-          send_name: "MagicMatch Admin",
-        };
+  //       const templateParams = {
+  //         user_email: localStorage.getItem("user_email"),
+  //         user_name: localStorage.getItem("name"),
+  //         message: mess, // Ab ye empty nahi jayega
+  //         send_name: "MagicMatch Admin",
+  //       };
 
-        try {
-          const result = await emailjs.send(
-            "service_s7bc7so",
-            "template_5r34th9",
-            templateParams,
-            "7apsjFDK6tP05LZc-",
-          );
-          console.log("Match Email Sent:", result.text);
-          localStorage.setItem("ecount", "2"); // Stop duplicate emails
-        } catch (error) {
-          console.log("Email Error:", error);
-        }
-      }
-    };
+  //       try {
+  //         const result = await emailjs.send(
+  //           "service_s7bc7so",
+  //           "template_5r34th9",
+  //           templateParams,
+  //           "7apsjFDK6tP05LZc-",
+  //         );
+  //         console.log("Match Email Sent:", result.text);
+  //         localStorage.setItem("ecount", "2"); // Stop duplicate emails
+  //       } catch (error) {
+  //         console.log("Email Error:", error);
+  //       }
+  //     }
+  //   };
 
-    sendMatchEmail();
-  }, [users]);
+  //   sendMatchEmail();
+  // }, [users]);
   const handlenext = () => {
     if (page === pagecount) {
       return page;
@@ -112,12 +111,13 @@ const MatchCard = ({ users, iduser }) => {
       const LIMIT = 3;
       const skip = LIMIT * page;
       const dataskip = users.slice(page === 1 ? 0 : skip - LIMIT, skip);
+      console.log(dataskip);
       setpagedata(dataskip);
     }
   }, [users, page]);
   return (
     <>
-      <form ref={form} style={{display:"none"}}>
+      {/* <form ref={form} style={{display:"none"}}>
         <input
           type="email"
           defaultValue={localStorage.getItem("user_email")}
@@ -130,7 +130,7 @@ const MatchCard = ({ users, iduser }) => {
         />
         <input  type="text" name="send_name" />
         <input   type="text" name="message"/>
-      </form>
+      </form> */}
       {users.length === 0 ? (
         <div className=" text-center text-white heading1">No Matches </div>
       ) : users.length === 1 ? (
@@ -164,11 +164,10 @@ const MatchCard = ({ users, iduser }) => {
                 className="card"
               >
                 <div className="card-body">
-                  {element.Payment &&
-                  element.Payment.length > 0 &&
-                  element.Payment[0].approval_status === 1 ? (
+                  {element.paymentData?.approval_status === 1 ? (
                     <p className="text-danger">Premium Member</p>
                   ) : null}
+                  <p className="float-end text-danger">Match:{element.matchCompatibility}%</p>
                   <div className="container">
                     <div className="row">
                       <div className="col-sm-4">
@@ -180,9 +179,8 @@ const MatchCard = ({ users, iduser }) => {
                           }}
                           alt="no img"
                           src={
-                            element.Details && element.Details.length > 0
-                              ? element.Details[0].user_photo
-                              : "https://via.placeholder.com/150"
+                            element.photoData?.user_photo ||
+                            "https://via.placeholder.com/150"
                           }
                         />
                       </div>
@@ -194,9 +192,7 @@ const MatchCard = ({ users, iduser }) => {
                           <div className="col-sm-6">
                             <p>
                               {element.user_age}yrs,
-                              {element.general && element.general.length > 0
-                                ? element.general[0].user_height
-                                : "N/A Height"}
+                              {element.generalData?.user_height}
                             </p>
                             <p>
                               {element.user_religion},{element.user_caste}
@@ -210,10 +206,8 @@ const MatchCard = ({ users, iduser }) => {
                               {element.user_country}
                             </p>
                             <p>
-                              {element.educational &&
-                              element.educational.length > 0
-                                ? element.educational[0].user_profession
-                                : "N/A Profession"}
+                              {element.educationData?.user_profession ||
+                                "N/A Profession"}
                             </p>
                           </div>
                         </div>
@@ -249,7 +243,7 @@ const MatchCard = ({ users, iduser }) => {
                                 style={{ fontSize: "50px", color: "green" }}
                                 class="fa-solid fa-circle-check"
                               ></i>
-                            </button>{" "}
+                            </button>
                             <p>Upgrade to Connect</p>
                           </div>
                         ) : iduser.Payment[0].approval_status === 0 ||
@@ -303,12 +297,14 @@ const MatchCard = ({ users, iduser }) => {
                                     }),
                                   },
                                 );
-     if (sign.status === 401) {
-       console.log("Authentication failed: No token or invalid token");
-       localStorage.clear(); // Safety ke liye storage saaf karein
-       history("/login", { replace: true }); // Login par redirect
-       return; // Function ko yahan stop karein
-     }
+                                if (sign.status === 401) {
+                                  console.log(
+                                    "Authentication failed: No token or invalid token",
+                                  );
+                                  localStorage.clear(); // Safety ke liye storage saaf karein
+                                  history("/login", { replace: true }); // Login par redirect
+                                  return; // Function ko yahan stop karein
+                                }
                                 const resp = await sign.json();
                                 console.log(resp);
                                 if (sign.status === 404 || !resp) {
